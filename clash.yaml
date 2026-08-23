@@ -1,153 +1,199 @@
 port: 7890
 socks-port: 7891
 allow-lan: true
+bind-address: '*'
+ipv6: false
 mode: Rule
 log-level: info
 external-controller: 127.0.0.1:9090
+dns:
+  enable: true
+  ipv6: false
+  listen: 0.0.0.0:53
+  fake-ip-range: 198.18.0.1/16
+  use-hosts: true
+  fake-ip-filter:
+  - '*.lan'
+  - '*.local'
+  - '*.arpa'
+  - time.*.com
+  - ntp.*.com
+  - +.market.xiaomi.com
+  - localhost.ptlogin2.qq.com
+  - '*.msftncsi.com'
+  - www.msftconnecttest.com
+  default-nameserver:
+  - 119.29.29.29
+  - 223.5.5.5
+  nameserver:
+  - 119.29.29.29
+  - 223.5.5.5
+  nameserver-policy:
+    geosite:cn:
+    - 119.29.29.29
+    - 223.5.5.5
+    geosite:geolocation-!cn:
+    - tls://1.0.0.1:853
+    - tls://dns.google:853
+  proxy-server-nameserver:
+  - 119.29.29.29
+  - 223.5.5.5
+  fallback:
+  - 8.8.8.8
+  - 1.1.1.1
+  - tls://1.0.0.1:853
+  - tls://dns.google:853
+  fallback-filter:
+    geoip: true
+    geoip-code: CN
+    geosite:
+    - gfw
+    ipcidr:
+    - 240.0.0.0/4
 proxies:
-- {name: 香港 01, server: hk.mmovomm.xyz, port: 443, type: vless, uuid: mmovomm, tls: true, flow: xtls-rprx-vision, reality-opts: {public-key: hc7U5CLaX2GK1_tyHnNaeQnHs_RC0XubV37OSOtFqz0}, servername: www.amd.com, client-fingerprint: chrome, network: tcp}
-- {name: 香港 02, server: 43.255.120.134, port: 443, type: ss, cipher: chacha20-ietf-poly1305, password: 3lHP7Wvt9nJXtxLdTTE6, udp: true}
-- {name: 香港 03, server: 101.36.117.224, port: 2310, type: vmess, uuid: 499399e2-dd09-44b6-af79-288686090aea, alterId: 0, cipher: auto, tls: false, network: ws, ws-opts: {path: /direct}, udp: true}
-- {name: 香港 04, server: hk.bestmatechina.com, port: 47477, type: vless, uuid: 6c712c19-1e0d-4aef-b03a-fdae995eebcc, tls: true, flow: xtls-rprx-vision, reality-opts: {public-key: 43tuVQvb6jjnT2s5UKkvaxT0B1qnh5uZvsqxIHYkZSw, short-id: 1f83fbeaad97c7}, servername: www.samsung.com, client-fingerprint: chrome, network: tcp}
-- {name: 日本 01, server: 43.165.177.82, port: 443, type: vless, uuid: 0b772594-d6b9-4f4f-849b-8a6f92f594fe, tls: true, flow: xtls-rprx-vision, reality-opts: {public-key: ZuN9nc78h4Ccb19eb9NpTCs0jZkhJB8L0i1ZoAhu0XU, short-id: b2f4518cf979889d}, servername: www.cloudflare.com, client-fingerprint: chrome, network: tcp, udp: true}
-- {name: 日本 02, server: 108.61.223.231, port: 443, type: ss, cipher: chacha20-ietf-poly1305, password: WbEN0g6Rbnsye8EJZz94OF, udp: true}
-- {name: 日本 03, server: 38.47.98.239, port: 8443, type: hysteria2, password: xdAKV-K0XVhyG_nCaCbjcMWG, auth: xdAKV-K0XVhyG_nCaCbjcMWG, sni: 38.47.98.239, skip-cert-verify: true, alpn: [h3]}
-- {name: 日本 04, server: 64.83.32.126, port: 8481, type: ss, cipher: chacha20-ietf-poly1305, password: 36f55197d2bac2db2ed81c569ce9576c, udp: true}
-- {name: 日本 05, server: 212.50.233.32, port: 8881, type: vless, uuid: c84ba8aa-3ec3-460b-98e7-f5bb5015c6f8, tls: true, flow: xtls-rprx-vision, reality-opts: {public-key: rYbiIvlL_LIzVrdyGGm-_wOLP-Nosntt8MA6NPdaDHY}, servername: addons.mozilla.org, client-fingerprint: chrome, network: tcp, udp: true}
-- {name: 日本 06, server: 45.78.59.140, port: 443, type: vless, uuid: e32ba095-fbbc-44be-b275-164e16784952, tls: true, flow: xtls-rprx-vision, reality-opts: {public-key: XyXKNx8LxvTBpTsqGGQoLhJhtR9IywoyyiBtaZU_myY, short-id: f95319ba34}, servername: www.icloud.com, client-fingerprint: chrome, network: tcp, udp: true}
-- {name: 日本 07, server: 154.36.153.216, port: 1100, type: vless, uuid: 7a231d4b-c045-482c-a4ed-32854f9de783, tls: true, flow: xtls-rprx-vision, reality-opts: {public-key: EzYckDpyp7LQhAOF5ENWOmnhOvoR2ZtV_HgrGHhXJS8, short-id: a90613da8352eccf}, servername: apple.com, client-fingerprint: chrome, network: tcp, udp: true}
-- {name: 日本 08, server: 64.83.33.45, port: 443, type: ss, cipher: aes-256-gcm, password: AyqX8KynyyQLReOZorQRQbsvmiwxBQOf, udp: true}
-- {name: 日本 09, server: 64.81.115.233, port: 10000, type: vmess, uuid: b831381d-6324-4d53-ad4f-8cda48b30811, alterId: 0, cipher: auto, tls: true, skip-cert-verify: true, servername: aesdn.com}
-- {name: 日本 10, server: 45.143.131.65, port: 2670, type: vmess, uuid: 2af03d4c-faa6-4898-9e60-d380ec6631a3, alterId: 0, cipher: auto, tls: false, skip-cert-verify: true}
-- {name: 日本 11, server: 45.128.210.127, port: 28666, type: mieru, password: d4909850ac8a358c469ac7b523da9493, username: agenttokyo2, multiplexing: MULTIPLEXING_LOW, transport: TCP, udp: true}
-- {name: 日本 12, server: 156.231.113.153, port: 443, type: vless, uuid: 3340c44a-042e-4dfd-b82c-33192d56ba98, tls: true, flow: xtls-rprx-vision, reality-opts: {public-key: h2GGazCHLBtmIUxiCxGUvsaEF8mGi8xFeCcI14sAJTI, short-id: 4bbe62498d4cc3c9}, servername: www.cloudflare.com, client-fingerprint: chrome, network: tcp, udp: true}
-- {name: 日本 13, server: 43.167.198.167, port: 443, type: hysteria2, password: fJT5wNXNkYDvYKKGWUc9f2vd0LvHKSwc, auth: fJT5wNXNkYDvYKKGWUc9f2vd0LvHKSwc, sni: 43.167.198.167, skip-cert-verify: true}
-- {name: 日本 14, server: 134.122.202.244, port: 44915, type: vless, uuid: 0ca45842-71e2-47fe-889f-9e75f93ea459, tls: false, network: tcp}
-- {name: 日本 15, server: 137.220.221.179, port: 443, type: vless, uuid: a16a3336-c9ab-489f-9b85-c973f5e2cfa4, tls: false, network: tcp}
-- {name: 日本 16, server: 45.129.9.231, port: 29666, type: mieru, password: 041cc5ccb7d68d50b2232782e294eafc, username: agenttokyo1, multiplexing: MULTIPLEXING_LOW, transport: TCP, udp: true}
-- {name: 日本 17, server: 66.112.211.35, port: 443, type: ss, cipher: aes-128-gcm, password: synlgmm}
-- {name: 新加坡 01, server: 96.9.231.78, port: 25666, type: mieru, password: ad2b2878978c95635061e7cb01e24adf, username: agentsingapore, multiplexing: MULTIPLEXING_LOW, transport: TCP, udp: true}
-- {name: 新加坡 02, server: 134.122.154.210, port: 443, type: vless, uuid: 7f549a50-4655-46b6-962d-183cfc532fc9, tls: false, network: tcp}
-- {name: 韩国 01, server: 132.145.91.167, port: 25678, type: hysteria2, password: Hy2@King2026, auth: Hy2@King2026, sni: bing.com, skip-cert-verify: true}
-- {name: 韩国 02, server: 43.133.253.211, port: 8444, type: trojan, password: StO6w4Osht9ZcK2mIv3U14, sni: 43.133.253.211, skip-cert-verify: true, udp: true}
-- {name: 美国 01, server: 67.216.207.17, port: 443, type: vless, uuid: 2cbf364a-93b8-4f1f-983f-ada171829532, tls: true, flow: xtls-rprx-vision, reality-opts: {public-key: hN6h511u63rsdJCaxn2G6VzTUserw6lBmG0eFkIKCic, short-id: 083d78ff5f0471ed}, servername: www.microsoft.com, client-fingerprint: chrome, network: tcp, udp: true}
-- {name: 美国 02, server: 64.118.154.155, port: 21016, type: vmess, uuid: 8c34c55f-2fc2-4cd0-8454-193d88b053cb, alterId: 0, cipher: auto, tls: false, skip-cert-verify: true}
-- {name: 美国 03, server: 64.83.12.153, port: 443, type: vmess, uuid: 9d476209-d8bd-9536-6e8d-61c97ec114db, alterId: 0, cipher: auto, tls: false}
-- {name: 美国 04, server: www.terence-tunnel.org, port: 443, type: vless, uuid: c47eb7ab-2c2d-44e0-80cc-bb104f89a137, tls: true, servername: www.terence-tunnel.org, network: ws, ws-opts: {path: /tunnel, headers: {Host: www.terence-tunnel.org}}}
-- {name: 美国 05, server: 104.225.235.222, port: 443, type: vmess, uuid: ac89c4c3-c17a-4961-a4ed-a06695a8bd88, alterId: 0, cipher: auto, tls: true, skip-cert-verify: true}
-- {name: 美国 06, server: 185.238.251.207, port: 443, type: vless, uuid: 8367513c-e6af-4f9d-85b4-f527816a03bb, tls: true, flow: xtls-rprx-vision, reality-opts: {public-key: doNd-f1bIh82aC2-I0plzWQqlev7ZcIlv7XRJ35MjVE, short-id: c77216010f29aec6}, servername: gateway.icloud.com, client-fingerprint: chrome, network: tcp, udp: true}
-- {name: 美国 07, server: 23.252.104.131, port: 54321, type: ss, cipher: aes-256-gcm, password: Proxy2024}
-- {name: 美国 08, server: 154.29.151.222, port: 33850, type: vless, uuid: 36eb563d-d9f3-4978-9d93-e3517c99b13c, tls: true, reality-opts: {public-key: UAnKaS9uYNIC2n28DaJdcuLxfsrD-_fEUxuAMxTn_y4}, servername: addons.mozilla.org, client-fingerprint: chrome, network: tcp}
-- {name: 美国 09, server: 66.112.214.246, port: 443, type: vless, uuid: a900899d-ab39-4d82-a2cd-a4ad28eebc21, tls: true, flow: xtls-rprx-vision, reality-opts: {public-key: oGxL_rHFVBV5PSYJikUJtPj0qzSJiwS-fkcxievVC1U, short-id: 63ad0d246040ae}, servername: www.cloudflare.com, client-fingerprint: chrome, network: tcp, udp: true}
-- {name: 美国 10, server: 104.225.232.25, port: 10877, type: vless, uuid: 42613786-2036-4a79-ad64-cc65d4e60a8d, tls: true, flow: xtls-rprx-vision, reality-opts: {public-key: zX35soHloTc-mNt8U2GiZQaRZuKr4v_GjMEV7SMyiUw}, servername: www.paypal.com, client-fingerprint: chrome, network: tcp, udp: true}
-- {name: 美国 11, server: 107.175.221.34, port: 443, type: vless, uuid: 636deb6a-8396-4325-b0f2-43660587c0e6, tls: true, flow: xtls-rprx-vision, reality-opts: {public-key: 455D6cAT49LYFp9sw9A2A6w_NL-QVCxtRXNsoYRMVjo, short-id: ba0f8e1c3d5a7f29}, servername: www.lovelive-anime.jp, client-fingerprint: chrome, network: tcp, udp: true}
-- {name: 美国 12, server: 66.112.214.26, port: 443, type: vless, uuid: 490a11eb-e38a-4a85-b391-7175de597b80, tls: true, flow: xtls-rprx-vision, reality-opts: {public-key: ExoLmgvra4OkUzW08_tkUKCOpqZ-fp-sur_NqpRui1s}, servername: www.icloud.com, client-fingerprint: chrome, network: tcp, udp: true}
-- {name: 美国 13, server: 97.64.30.227, port: 443, type: vless, uuid: eb534939-3159-4188-865a-deef4ab39ae2, tls: true, flow: xtls-rprx-vision, reality-opts: {public-key: _bxEBATGniBF4AfbzCwrOlygRIjKXUQugXb5ZPuyYxU}, servername: www.cloudflare.com, client-fingerprint: chrome, network: tcp}
-- {name: 美国 14, server: 67.209.186.220, port: 1080, type: socks5, username: root, password: vwVFOQvMxl1G}
-- {name: 美国 15, server: 66.112.210.115, port: 443, type: vless, uuid: a9f66cd5-3fd4-4fa3-9eca-a17c9b57d56d, tls: true, flow: xtls-rprx-vision, reality-opts: {public-key: OlCfmq4z1cD5DcLFrLZoAgc-ORLVTeSkEAdhBbqp3W0, short-id: df5249b2b089924d}, servername: www.microsoft.com, client-fingerprint: chrome, network: tcp, udp: true}
-- {name: 美国 16, server: 97.64.20.203, port: 443, type: ss, cipher: aes-256-gcm, password: eT0hbu0qSofBP6mRWN56oSAN}
-- {name: 美国 17, server: 23.147.56.166, port: 9443, type: hysteria2, password: 1856e5be45f687de, auth: 1856e5be45f687de, sni: 23.147.56.166, skip-cert-verify: true, udp: true}
-- {name: 美国 18, server: 45.62.104.94, port: 10443, type: hysteria2, password: mCu2SEGBFrxfzjmBcgyGA, auth: mCu2SEGBFrxfzjmBcgyGA, up: 1000, down: 1000, skip-cert-verify: true}
-- {name: 德国 01, server: 23.165.200.168, port: 49527, type: vless, uuid: 853a3bff-2583-4908-9f16-934bb3077d24, tls: true, flow: xtls-rprx-vision, reality-opts: {public-key: IbI4GjOoEE7mFvOyegC2bdADUgDjzpz24OIIhQhzdnc, short-id: 9c4b91b9}, servername: apple.com, client-fingerprint: chrome, network: tcp, udp: true}
-- {name: 荷兰 01, server: 185.239.71.250, port: 8388, type: ss, cipher: aes-256-gcm, password: 3n84BkLhcGF8Mioo, udp: true}
+- {name: 🇭🇰 香港 01, server: hk.mmovomm.xyz, port: 443, type: vless, uuid: mmovomm, tls: true, flow: xtls-rprx-vision, reality-opts: {public-key: hc7U5CLaX2GK1_tyHnNaeQnHs_RC0XubV37OSOtFqz0}, servername: www.amd.com, client-fingerprint: chrome, network: tcp}
+- {name: 🇭🇰 香港 02, server: 43.255.120.134, port: 443, type: ss, cipher: chacha20-ietf-poly1305, password: 3lHP7Wvt9nJXtxLdTTE6, udp: true}
+- {name: 🇭🇰 香港 03, server: 101.36.117.224, port: 2310, type: vmess, uuid: 499399e2-dd09-44b6-af79-288686090aea, alterId: 0, cipher: auto, tls: false, network: ws, ws-opts: {path: /direct}, udp: true}
+- {name: 🇭🇰 香港 04, server: hk.bestmatechina.com, port: 47477, type: vless, uuid: 6c712c19-1e0d-4aef-b03a-fdae995eebcc, tls: true, flow: xtls-rprx-vision, reality-opts: {public-key: 43tuVQvb6jjnT2s5UKkvaxT0B1qnh5uZvsqxIHYkZSw, short-id: 1f83fbeaad97c7}, servername: www.samsung.com, client-fingerprint: chrome, network: tcp}
+- {name: 🇯🇵 日本 01, server: 43.165.177.82, port: 443, type: vless, uuid: 0b772594-d6b9-4f4f-849b-8a6f92f594fe, tls: true, flow: xtls-rprx-vision, reality-opts: {public-key: ZuN9nc78h4Ccb19eb9NpTCs0jZkhJB8L0i1ZoAhu0XU, short-id: b2f4518cf979889d}, servername: www.cloudflare.com, client-fingerprint: chrome, network: tcp, udp: true}
+- {name: 🇯🇵 日本 02, server: 108.61.223.231, port: 443, type: ss, cipher: chacha20-ietf-poly1305, password: WbEN0g6Rbnsye8EJZz94OF, udp: true}
+- {name: 🇯🇵 日本 03, server: 38.47.98.239, port: 8443, type: hysteria2, password: xdAKV-K0XVhyG_nCaCbjcMWG, auth: xdAKV-K0XVhyG_nCaCbjcMWG, sni: 38.47.98.239, skip-cert-verify: true, alpn: [h3]}
+- {name: 🇯🇵 日本 04, server: 64.83.32.126, port: 8481, type: ss, cipher: chacha20-ietf-poly1305, password: 36f55197d2bac2db2ed81c569ce9576c, udp: true}
+- {name: 🇯🇵 日本 05, server: 212.50.233.32, port: 8881, type: vless, uuid: c84ba8aa-3ec3-460b-98e7-f5bb5015c6f8, tls: true, flow: xtls-rprx-vision, reality-opts: {public-key: rYbiIvlL_LIzVrdyGGm-_wOLP-Nosntt8MA6NPdaDHY}, servername: addons.mozilla.org, client-fingerprint: chrome, network: tcp, udp: true}
+- {name: 🇯🇵 日本 06, server: 45.78.59.140, port: 443, type: vless, uuid: e32ba095-fbbc-44be-b275-164e16784952, tls: true, flow: xtls-rprx-vision, reality-opts: {public-key: XyXKNx8LxvTBpTsqGGQoLhJhtR9IywoyyiBtaZU_myY, short-id: f95319ba34}, servername: www.icloud.com, client-fingerprint: chrome, network: tcp, udp: true}
+- {name: 🇯🇵 日本 07, server: 154.36.153.216, port: 1100, type: vless, uuid: 7a231d4b-c045-482c-a4ed-32854f9de783, tls: true, flow: xtls-rprx-vision, reality-opts: {public-key: EzYckDpyp7LQhAOF5ENWOmnhOvoR2ZtV_HgrGHhXJS8, short-id: a90613da8352eccf}, servername: apple.com, client-fingerprint: chrome, network: tcp, udp: true}
+- {name: 🇯🇵 日本 08, server: 64.83.33.45, port: 443, type: ss, cipher: aes-256-gcm, password: AyqX8KynyyQLReOZorQRQbsvmiwxBQOf, udp: true}
+- {name: 🇯🇵 日本 09, server: 64.81.115.233, port: 10000, type: vmess, uuid: b831381d-6324-4d53-ad4f-8cda48b30811, alterId: 0, cipher: auto, tls: true, skip-cert-verify: true, servername: aesdn.com}
+- {name: 🇯🇵 日本 10, server: 45.143.131.65, port: 2670, type: vmess, uuid: 2af03d4c-faa6-4898-9e60-d380ec6631a3, alterId: 0, cipher: auto, tls: false, skip-cert-verify: true}
+- {name: 🇯🇵 日本 11, server: 45.128.210.127, port: 28666, type: mieru, password: d4909850ac8a358c469ac7b523da9493, username: agenttokyo2, multiplexing: MULTIPLEXING_LOW, transport: TCP, udp: true}
+- {name: 🇯🇵 日本 12, server: 156.231.113.153, port: 443, type: vless, uuid: 3340c44a-042e-4dfd-b82c-33192d56ba98, tls: true, flow: xtls-rprx-vision, reality-opts: {public-key: h2GGazCHLBtmIUxiCxGUvsaEF8mGi8xFeCcI14sAJTI, short-id: 4bbe62498d4cc3c9}, servername: www.cloudflare.com, client-fingerprint: chrome, network: tcp, udp: true}
+- {name: 🇯🇵 日本 13, server: 43.167.198.167, port: 443, type: hysteria2, password: fJT5wNXNkYDvYKKGWUc9f2vd0LvHKSwc, auth: fJT5wNXNkYDvYKKGWUc9f2vd0LvHKSwc, sni: 43.167.198.167, skip-cert-verify: true}
+- {name: 🇯🇵 日本 14, server: 134.122.202.244, port: 44915, type: vless, uuid: 0ca45842-71e2-47fe-889f-9e75f93ea459, tls: false, client-fingerprint: chrome, network: tcp}
+- {name: 🇯🇵 日本 15, server: 137.220.221.179, port: 443, type: vless, uuid: a16a3336-c9ab-489f-9b85-c973f5e2cfa4, tls: false, client-fingerprint: chrome, network: tcp}
+- {name: 🇯🇵 日本 16, server: 45.129.9.231, port: 29666, type: mieru, password: 041cc5ccb7d68d50b2232782e294eafc, username: agenttokyo1, multiplexing: MULTIPLEXING_LOW, transport: TCP, udp: true}
+- {name: 🇯🇵 日本 17, server: 66.112.211.35, port: 443, type: ss, cipher: aes-128-gcm, password: synlgmm}
+- {name: 🇸🇬 新加坡 01, server: 96.9.231.78, port: 25666, type: mieru, password: ad2b2878978c95635061e7cb01e24adf, username: agentsingapore, multiplexing: MULTIPLEXING_LOW, transport: TCP, udp: true}
+- {name: 🇸🇬 新加坡 02, server: 134.122.154.210, port: 443, type: vless, uuid: 7f549a50-4655-46b6-962d-183cfc532fc9, tls: false, client-fingerprint: chrome, network: tcp}
+- {name: 🇰🇷 韩国 01, server: 132.145.91.167, port: 25678, type: hysteria2, password: Hy2@King2026, auth: Hy2@King2026, sni: bing.com, skip-cert-verify: true}
+- {name: 🇰🇷 韩国 02, server: 43.133.253.211, port: 8444, type: trojan, password: StO6w4Osht9ZcK2mIv3U14, sni: 43.133.253.211, skip-cert-verify: true, udp: true}
+- {name: 🇺🇸 美国 01, server: 67.216.207.17, port: 443, type: vless, uuid: 2cbf364a-93b8-4f1f-983f-ada171829532, tls: true, flow: xtls-rprx-vision, reality-opts: {public-key: hN6h511u63rsdJCaxn2G6VzTUserw6lBmG0eFkIKCic, short-id: 083d78ff5f0471ed}, servername: www.microsoft.com, client-fingerprint: chrome, network: tcp, udp: true}
+- {name: 🇺🇸 美国 02, server: 64.118.154.155, port: 21016, type: vmess, uuid: 8c34c55f-2fc2-4cd0-8454-193d88b053cb, alterId: 0, cipher: auto, tls: false, skip-cert-verify: true}
+- {name: 🇺🇸 美国 03, server: 64.83.12.153, port: 443, type: vmess, uuid: 9d476209-d8bd-9536-6e8d-61c97ec114db, alterId: 0, cipher: auto, tls: false}
+- {name: 🇺🇸 美国 04, server: www.terence-tunnel.org, port: 443, type: vless, uuid: c47eb7ab-2c2d-44e0-80cc-bb104f89a137, tls: true, servername: www.terence-tunnel.org, client-fingerprint: chrome, network: ws, ws-opts: {path: /tunnel, headers: {Host: www.terence-tunnel.org}}}
+- {name: 🇺🇸 美国 05, server: 104.225.235.222, port: 443, type: vmess, uuid: ac89c4c3-c17a-4961-a4ed-a06695a8bd88, alterId: 0, cipher: auto, tls: true, skip-cert-verify: true}
+- {name: 🇺🇸 美国 06, server: 185.238.251.207, port: 443, type: vless, uuid: 8367513c-e6af-4f9d-85b4-f527816a03bb, tls: true, flow: xtls-rprx-vision, reality-opts: {public-key: doNd-f1bIh82aC2-I0plzWQqlev7ZcIlv7XRJ35MjVE, short-id: c77216010f29aec6}, servername: gateway.icloud.com, client-fingerprint: chrome, network: tcp, udp: true}
+- {name: 🇺🇸 美国 07, server: 23.252.104.131, port: 54321, type: ss, cipher: aes-256-gcm, password: Proxy2024}
+- {name: 🇺🇸 美国 08, server: 154.29.151.222, port: 33850, type: vless, uuid: 36eb563d-d9f3-4978-9d93-e3517c99b13c, tls: true, reality-opts: {public-key: UAnKaS9uYNIC2n28DaJdcuLxfsrD-_fEUxuAMxTn_y4}, servername: addons.mozilla.org, client-fingerprint: chrome, network: tcp}
+- {name: 🇺🇸 美国 09, server: 66.112.214.246, port: 443, type: vless, uuid: a900899d-ab39-4d82-a2cd-a4ad28eebc21, tls: true, flow: xtls-rprx-vision, reality-opts: {public-key: oGxL_rHFVBV5PSYJikUJtPj0qzSJiwS-fkcxievVC1U, short-id: 63ad0d246040ae}, servername: www.cloudflare.com, client-fingerprint: chrome, network: tcp, udp: true}
+- {name: 🇺🇸 美国 10, server: 104.225.232.25, port: 10877, type: vless, uuid: 42613786-2036-4a79-ad64-cc65d4e60a8d, tls: true, flow: xtls-rprx-vision, reality-opts: {public-key: zX35soHloTc-mNt8U2GiZQaRZuKr4v_GjMEV7SMyiUw}, servername: www.paypal.com, client-fingerprint: chrome, network: tcp, udp: true}
+- {name: 🇺🇸 美国 11, server: 107.175.221.34, port: 443, type: vless, uuid: 636deb6a-8396-4325-b0f2-43660587c0e6, tls: true, flow: xtls-rprx-vision, reality-opts: {public-key: 455D6cAT49LYFp9sw9A2A6w_NL-QVCxtRXNsoYRMVjo, short-id: ba0f8e1c3d5a7f29}, servername: www.lovelive-anime.jp, client-fingerprint: chrome, network: tcp, udp: true}
+- {name: 🇺🇸 美国 12, server: 66.112.214.26, port: 443, type: vless, uuid: 490a11eb-e38a-4a85-b391-7175de597b80, tls: true, flow: xtls-rprx-vision, reality-opts: {public-key: ExoLmgvra4OkUzW08_tkUKCOpqZ-fp-sur_NqpRui1s}, servername: www.icloud.com, client-fingerprint: chrome, network: tcp, udp: true}
+- {name: 🇺🇸 美国 13, server: 97.64.30.227, port: 443, type: vless, uuid: eb534939-3159-4188-865a-deef4ab39ae2, tls: true, flow: xtls-rprx-vision, reality-opts: {public-key: _bxEBATGniBF4AfbzCwrOlygRIjKXUQugXb5ZPuyYxU}, servername: www.cloudflare.com, client-fingerprint: chrome, network: tcp}
+- {name: 🇺🇸 美国 14, server: 67.209.186.220, port: 1080, type: socks5, username: root, password: vwVFOQvMxl1G}
+- {name: 🇺🇸 美国 15, server: 66.112.210.115, port: 443, type: vless, uuid: a9f66cd5-3fd4-4fa3-9eca-a17c9b57d56d, tls: true, flow: xtls-rprx-vision, reality-opts: {public-key: OlCfmq4z1cD5DcLFrLZoAgc-ORLVTeSkEAdhBbqp3W0, short-id: df5249b2b089924d}, servername: www.microsoft.com, client-fingerprint: chrome, network: tcp, udp: true}
+- {name: 🇺🇸 美国 16, server: 97.64.20.203, port: 443, type: ss, cipher: aes-256-gcm, password: eT0hbu0qSofBP6mRWN56oSAN}
+- {name: 🇺🇸 美国 17, server: 23.147.56.166, port: 9443, type: hysteria2, password: 1856e5be45f687de, auth: 1856e5be45f687de, sni: 23.147.56.166, skip-cert-verify: true, udp: true}
+- {name: 🇺🇸 美国 18, server: 45.62.104.94, port: 10443, type: hysteria2, password: mCu2SEGBFrxfzjmBcgyGA, auth: mCu2SEGBFrxfzjmBcgyGA, up: 1000, down: 1000, skip-cert-verify: true}
+- {name: 🇩🇪 德国 01, server: 23.165.200.168, port: 49527, type: vless, uuid: 853a3bff-2583-4908-9f16-934bb3077d24, tls: true, flow: xtls-rprx-vision, reality-opts: {public-key: IbI4GjOoEE7mFvOyegC2bdADUgDjzpz24OIIhQhzdnc, short-id: 9c4b91b9}, servername: apple.com, client-fingerprint: chrome, network: tcp, udp: true}
+- {name: 🇳🇱 荷兰 01, server: 185.239.71.250, port: 8388, type: ss, cipher: aes-256-gcm, password: 3n84BkLhcGF8Mioo, udp: true}
 proxy-groups:
 - name: 🚀 节点选择
   type: select
   proxies:
   - ♻️ 自动选择
-  - 香港 01
-  - 香港 02
-  - 香港 03
-  - 香港 04
-  - 日本 01
-  - 日本 02
-  - 日本 03
-  - 日本 04
-  - 日本 05
-  - 日本 06
-  - 日本 07
-  - 日本 08
-  - 日本 09
-  - 日本 10
-  - 日本 11
-  - 日本 12
-  - 日本 13
-  - 日本 14
-  - 日本 15
-  - 日本 16
-  - 日本 17
-  - 新加坡 01
-  - 新加坡 02
-  - 韩国 01
-  - 韩国 02
-  - 美国 01
-  - 美国 02
-  - 美国 03
-  - 美国 04
-  - 美国 05
-  - 美国 06
-  - 美国 07
-  - 美国 08
-  - 美国 09
-  - 美国 10
-  - 美国 11
-  - 美国 12
-  - 美国 13
-  - 美国 14
-  - 美国 15
-  - 美国 16
-  - 美国 17
-  - 美国 18
-  - 德国 01
-  - 荷兰 01
+  - 🇭🇰 香港 01
+  - 🇭🇰 香港 02
+  - 🇭🇰 香港 03
+  - 🇭🇰 香港 04
+  - 🇯🇵 日本 01
+  - 🇯🇵 日本 02
+  - 🇯🇵 日本 03
+  - 🇯🇵 日本 04
+  - 🇯🇵 日本 05
+  - 🇯🇵 日本 06
+  - 🇯🇵 日本 07
+  - 🇯🇵 日本 08
+  - 🇯🇵 日本 09
+  - 🇯🇵 日本 10
+  - 🇯🇵 日本 11
+  - 🇯🇵 日本 12
+  - 🇯🇵 日本 13
+  - 🇯🇵 日本 14
+  - 🇯🇵 日本 15
+  - 🇯🇵 日本 16
+  - 🇯🇵 日本 17
+  - 🇸🇬 新加坡 01
+  - 🇸🇬 新加坡 02
+  - 🇰🇷 韩国 01
+  - 🇰🇷 韩国 02
+  - 🇺🇸 美国 01
+  - 🇺🇸 美国 02
+  - 🇺🇸 美国 03
+  - 🇺🇸 美国 04
+  - 🇺🇸 美国 05
+  - 🇺🇸 美国 06
+  - 🇺🇸 美国 07
+  - 🇺🇸 美国 08
+  - 🇺🇸 美国 09
+  - 🇺🇸 美国 10
+  - 🇺🇸 美国 11
+  - 🇺🇸 美国 12
+  - 🇺🇸 美国 13
+  - 🇺🇸 美国 14
+  - 🇺🇸 美国 15
+  - 🇺🇸 美国 16
+  - 🇺🇸 美国 17
+  - 🇺🇸 美国 18
+  - 🇩🇪 德国 01
+  - 🇳🇱 荷兰 01
 - name: ♻️ 自动选择
   type: url-test
   proxies:
-  - 香港 01
-  - 香港 02
-  - 香港 03
-  - 香港 04
-  - 日本 01
-  - 日本 02
-  - 日本 03
-  - 日本 04
-  - 日本 05
-  - 日本 06
-  - 日本 07
-  - 日本 08
-  - 日本 09
-  - 日本 10
-  - 日本 11
-  - 日本 12
-  - 日本 13
-  - 日本 14
-  - 日本 15
-  - 日本 16
-  - 日本 17
-  - 新加坡 01
-  - 新加坡 02
-  - 韩国 01
-  - 韩国 02
-  - 美国 01
-  - 美国 02
-  - 美国 03
-  - 美国 04
-  - 美国 05
-  - 美国 06
-  - 美国 07
-  - 美国 08
-  - 美国 09
-  - 美国 10
-  - 美国 11
-  - 美国 12
-  - 美国 13
-  - 美国 14
-  - 美国 15
-  - 美国 16
-  - 美国 17
-  - 美国 18
-  - 德国 01
-  - 荷兰 01
+  - 🇭🇰 香港 01
+  - 🇭🇰 香港 02
+  - 🇭🇰 香港 03
+  - 🇭🇰 香港 04
+  - 🇯🇵 日本 01
+  - 🇯🇵 日本 02
+  - 🇯🇵 日本 03
+  - 🇯🇵 日本 04
+  - 🇯🇵 日本 05
+  - 🇯🇵 日本 06
+  - 🇯🇵 日本 07
+  - 🇯🇵 日本 08
+  - 🇯🇵 日本 09
+  - 🇯🇵 日本 10
+  - 🇯🇵 日本 11
+  - 🇯🇵 日本 12
+  - 🇯🇵 日本 13
+  - 🇯🇵 日本 14
+  - 🇯🇵 日本 15
+  - 🇯🇵 日本 16
+  - 🇯🇵 日本 17
+  - 🇸🇬 新加坡 01
+  - 🇸🇬 新加坡 02
+  - 🇰🇷 韩国 01
+  - 🇰🇷 韩国 02
+  - 🇺🇸 美国 01
+  - 🇺🇸 美国 02
+  - 🇺🇸 美国 03
+  - 🇺🇸 美国 04
+  - 🇺🇸 美国 05
+  - 🇺🇸 美国 06
+  - 🇺🇸 美国 07
+  - 🇺🇸 美国 08
+  - 🇺🇸 美国 09
+  - 🇺🇸 美国 10
+  - 🇺🇸 美国 11
+  - 🇺🇸 美国 12
+  - 🇺🇸 美国 13
+  - 🇺🇸 美国 14
+  - 🇺🇸 美国 15
+  - 🇺🇸 美国 16
+  - 🇺🇸 美国 17
+  - 🇺🇸 美国 18
+  - 🇩🇪 德国 01
+  - 🇳🇱 荷兰 01
   url: http://www.gstatic.com/generate_204
   interval: 300
 - name: 🐟 漏网之鱼

@@ -1,316 +1,270 @@
 port: 7890
 socks-port: 7891
 allow-lan: true
-bind-address: '*'
-ipv6: false
 mode: Rule
 log-level: info
 external-controller: 127.0.0.1:9090
-dns:
-  enable: true
-  ipv6: false
-  listen: 0.0.0.0:53
-  fake-ip-range: 198.18.0.1/16
-  use-hosts: true
-  fake-ip-filter:
-  - '*.lan'
-  - '*.local'
-  - '*.arpa'
-  - time.*.com
-  - ntp.*.com
-  - +.market.xiaomi.com
-  - localhost.ptlogin2.qq.com
-  - '*.msftncsi.com'
-  - www.msftconnecttest.com
-  default-nameserver:
-  - 119.29.29.29
-  - 223.5.5.5
-  nameserver:
-  - 119.29.29.29
-  - 223.5.5.5
-  nameserver-policy:
-    geosite:cn:
-    - 119.29.29.29
-    - 223.5.5.5
-    geosite:geolocation-!cn:
-    - tls://1.0.0.1:853
-    - tls://dns.google:853
-  proxy-server-nameserver:
-  - 119.29.29.29
-  - 223.5.5.5
-  fallback:
-  - 8.8.8.8
-  - 1.1.1.1
-  - tls://1.0.0.1:853
-  - tls://dns.google:853
-  fallback-filter:
-    geoip: true
-    geoip-code: CN
-    geosite:
-    - gfw
-    ipcidr:
-    - 240.0.0.0/4
 proxies:
-- {name: 🇭🇰 香港 01, server: 165.154.193.165, port: 443, type: hysteria2, password: qtMKhrFAMrVZUfupkc5CFHmRKYtNPSjt, auth: qtMKhrFAMrVZUfupkc5CFHmRKYtNPSjt, sni: 165.154.193.165, skip-cert-verify: true, obfs: salamander, obfs-password: d7897b996af77eeecb7ac010361d74fb, udp: true}
-- {name: 🇭🇰 香港 02, server: 64.90.0.209, port: 8448, type: vless, uuid: c595888b-36ca-45ed-bf5a-985dd6bf48f1, tls: true, servername: v.idudu.xyz, client-fingerprint: chrome, network: ws, ws-opts: {path: /ws, headers: {Host: v.idudu.xyz}}, udp: true}
-- {name: 🇭🇰 香港 03, server: guodaxian.xyz, port: 8443, type: hysteria2, password: 5c2e4f8a-1b3d-4e7f-9a0c-6d8b2f1e3a7d, auth: 5c2e4f8a-1b3d-4e7f-9a0c-6d8b2f1e3a7d, sni: guodaxian.xyz, udp: true}
-- {name: 🇭🇰 香港 04, server: 45.125.33.242, port: 8080, type: vmess, uuid: a0000000-0000-4000-8000-000000000009, alterId: 0, cipher: auto, tls: false}
-- {name: 🇭🇰 香港 05, server: 156.226.183.181, port: 54321, type: vmess, uuid: d3bcc1f1-6294-4f68-bcf3-c3bcb2001520, alterId: 0, cipher: auto, tls: false, udp: true}
-- {name: 🇭🇰 香港 06, server: 23.26.201.55, port: 8388, type: ss, cipher: aes-256-gcm, password: HKproxy2026!, udp: true}
-- {name: 🇭🇰 香港 07, server: 118.193.34.241, port: 443, type: vless, uuid: 09489038-d83a-4db7-bb54-1e264bb39a11, tls: true, flow: xtls-rprx-vision, reality-opts: {public-key: 0PIHIn25s6JOnKbej_J-iMwd80KzYU87UPLy6ZVy8D4, short-id: 037b12c65138375d}, servername: www.microsoft.com, client-fingerprint: chrome, network: tcp, udp: true}
-- {name: 🇭🇰 香港 08, server: px2.5ibtc.cn, port: 443, type: vless, uuid: 326227e2-f2d1-4f43-8715-9da854f5f4c0, tls: true, servername: px2.5ibtc.cn, client-fingerprint: chrome, network: ws, ws-opts: {path: /326227e2-f2d1-4f43-8715-9da854f5f4c0, headers: {Host: px2.5ibtc.cn}}}
-- {name: 🇭🇰 香港 09, server: 45.207.205.70, port: 443, type: vless, uuid: e1006017-dc10-4929-a5f3-919185ce8573, tls: true, flow: xtls-rprx-vision, reality-opts: {public-key: auBLZhjoptmkNKibdcrj-zrHFze_m-Vjfp9L1gsObjg, short-id: 520c729163dbb315}, servername: www.microsoft.com, client-fingerprint: chrome, network: tcp, udp: true}
-- {name: 🇭🇰 香港 10, server: mz.hkychina.com, port: 8443, type: hysteria2, password: HysTeria2026!Proxy, auth: HysTeria2026!Proxy, sni: mz.hkychina.com, up: 50 mib, down: 500 mib, skip-cert-verify: false}
-- {name: 🇯🇵 日本 01, server: 154.36.155.204, port: 45679, type: vless, uuid: 87e21476-633a-4961-afc5-aee16b6e8b06, tls: true, flow: xtls-rprx-vision, reality-opts: {public-key: qPBYczIxq7MUMJhk0uYjFcf7Vjq1pODNA_XukzHC_iQ, short-id: dcad52}, servername: www.oracle.com, client-fingerprint: chrome, network: tcp}
-- {name: 🇯🇵 日本 02, server: 64.83.38.190, port: 443, type: vless, uuid: 5f4715a3-2b48-442c-bc19-23c037a3c1ff, tls: true, flow: xtls-rprx-vision, reality-opts: {public-key: ZfNO7HLq4kesTVEvdgm7DeVz4DFEM4j7QVGsWl78dVE, short-id: b8fdfa03fef48e41}, servername: www.microsoft.com, client-fingerprint: chrome, network: tcp, udp: true}
-- {name: 🇯🇵 日本 03, server: 103.53.80.153, port: 8443, type: vless, uuid: 5cde3437-63f9-4c47-b644-92ce4823a533, tls: true, flow: xtls-rprx-vision, reality-opts: {public-key: pbSrOiVMfNOqnQoizBkVRx5chq14DmAInYj-3wySOBA, short-id: 365f5a7486a54dd7}, servername: www.microsoft.com, client-fingerprint: chrome, network: tcp}
-- {name: 🇯🇵 日本 04, server: 154.36.185.115, port: 443, type: vless, uuid: 6cbf2ded-5b0f-475f-bc17-a5314e13977e, tls: true, flow: xtls-rprx-vision, reality-opts: {public-key: 4pxrcnxn8xnYz25AkJYT8zEWv6bVJKBA--mEHeuaGxw, short-id: 2fdef909f3394cb7}, servername: www.microsoft.com, client-fingerprint: chrome, network: tcp, udp: true}
-- {name: 🇯🇵 日本 05, server: 64.83.34.73, port: 8443, type: vless, uuid: a6e863f5-68b7-4b40-ae13-2c548ab9cd4d, tls: true, flow: xtls-rprx-vision, reality-opts: {public-key: 7Ges2JjA6bVgHOQVFjjuMoyTFkd1WsH_JazeK7xob1o, short-id: bea0f01d30923934}, servername: www.microsoft.com, client-fingerprint: chrome, network: tcp, udp: true}
-- {name: 🇯🇵 日本 06, server: 154.36.181.161, port: 17000, type: vless, uuid: b56feff5-2066-4029-a712-b2db8d4294ca, tls: true, flow: xtls-rprx-vision, reality-opts: {public-key: 9x8WqTf_HavdW2jAxznLsH8kToc8Y6ygWtV9cB8eE3E, short-id: 125b9407}, servername: apple.com, client-fingerprint: chrome, network: tcp}
-- {name: 🇯🇵 日本 07, server: 202.182.101.137, port: 10000, type: hysteria2, password: +RZ4w9T09t4BVUZVHA1tGg==, auth: +RZ4w9T09t4BVUZVHA1tGg==, sni: www.microsoft.com, up: 100, down: 500, skip-cert-verify: true}
-- {name: 🇯🇵 日本 08, server: 207.148.109.142, port: 37128, type: hysteria2, password: 57727b3d-2ab5-41e0-9675-aed639774e4b, auth: 57727b3d-2ab5-41e0-9675-aed639774e4b, sni: www.ebay.com, up: 50, down: 200, skip-cert-verify: true}
-- {name: 🇯🇵 日本 09, server: 167.179.114.107, port: 443, type: vless, uuid: f27b2849-80d4-40ea-aca6-12f513f62e42, tls: true, flow: xtls-rprx-vision, reality-opts: {public-key: Bfsx1z2bey96T7SwAzexhi6Hlf8Dnq75W4ryGRH1RVs, short-id: ae335a3381a4cc2c}, servername: www.microsoft.com, client-fingerprint: chrome, network: tcp, udp: true}
-- {name: 🇯🇵 日本 10, server: 45.77.29.67, port: 443, type: vless, uuid: da71c5d2-1414-4de8-ba2f-581e1d3ed1eb, tls: true, flow: xtls-rprx-vision, reality-opts: {public-key: PhUvQpJguwlEKmdBiX-pdmUOeyu8oEQOLhWRskU7s3o, short-id: 8ab28f6d64a8}, servername: www.amazon.com, client-fingerprint: chrome, network: tcp, udp: true}
-- {name: 🇯🇵 日本 11, server: 45.32.57.118, port: 4433, type: vmess, uuid: 35b89832-0a7c-48dd-8d1c-a2891b522195, alterId: 0, cipher: auto, tls: false, skip-cert-verify: true, udp: true}
-- {name: 🇯🇵 日本 12, server: oc.imfun.fun, port: 18112, type: vmess, uuid: ad45f8f6-0f0a-4cc4-b907-c4582407dc94, alterId: 0, cipher: auto, tls: false, skip-cert-verify: true, udp: true}
-- {name: 🇯🇵 日本 13, server: 38.207.137.68, port: 58834, type: vless, uuid: e38a6892-1468-498e-b26b-28659e90ded4, tls: false, client-fingerprint: chrome, network: tcp}
-- {name: 🇯🇵 日本 14, server: pq.aws50.yydjc.top, port: 443, type: vless, uuid: 74258422-dd39-4b95-8baf-ef8acbf9ff9e, tls: true, flow: xtls-rprx-vision, reality-opts: {public-key: pR8CV43xvSgvzSXPVLCVomjw-yZvNyqU32kietO2pEc, short-id: a6115a2c}, servername: iosapps.itunes.apple.com, client-fingerprint: ios, network: tcp, udp: true}
-- {name: 🇯🇵 日本 15, server: 43.239.249.156, port: 443, type: hysteria2, password: s5vnxYINaom3GX8/kwt5Xa4cW9TbhnHk, auth: s5vnxYINaom3GX8/kwt5Xa4cW9TbhnHk, sni: www.microsoft.com, skip-cert-verify: true}
-- {name: 🇯🇵 日本 16, server: 144.34.183.80, port: 443, type: vless, uuid: 2e11313c-5cef-470e-99a5-e4cf2b4bb5a5, tls: true, flow: xtls-rprx-vision, reality-opts: {public-key: u2xj5VE8_y0ziMVdQNMBCfuOOl_t_jddfIcG-dI5dxg, short-id: 01041646a3fee44e}, servername: www.apple.com, client-fingerprint: chrome, network: tcp, udp: true}
-- {name: 🇯🇵 日本 17, server: 154.36.159.209, port: 443, type: vless, uuid: abd82a26-e957-4a08-bb22-63755a71ab01, tls: true, flow: xtls-rprx-vision, reality-opts: {public-key: qKtk8iy4InApOWBItS7WDYujvWcySg9DLNQRa0ztBUg, short-id: ccd16a8d6fd03f53}, servername: www.microsoft.com, client-fingerprint: chrome, network: tcp}
-- {name: 🇯🇵 日本 18, server: 38.175.203.11, port: 443, type: vless, uuid: 1b8ec962-6e6f-4fc3-a9a4-c8a6fc907796, tls: true, servername: oulucloud.706666.xyz, client-fingerprint: chrome, network: tcp, udp: true}
-- {name: 🇸🇬 新加坡 01, server: 96.9.231.250, port: 29560, type: vless, uuid: d69421f6-d4f2-424f-b919-6ec595210023, tls: true, flow: xtls-rprx-vision, reality-opts: {public-key: b6SP0i26ZFnU679c-eMXlBh69gzk-BpuPMdIaTKVbh0, short-id: 8a584baf8505ce06}, servername: www.microsoft.com, client-fingerprint: chrome, network: tcp, udp: true}
-- {name: 🇸🇬 新加坡 02, server: 172.93.186.31, port: 443, type: vless, uuid: d56c8315-1951-4c30-ab91-06ef3700b4ba, tls: true, flow: xtls-rprx-vision, servername: 172.93.186.31, client-fingerprint: chrome, network: tcp, udp: true}
-- {name: 🇺🇸 美国 01, server: www.terence-tunnel.org, port: 443, type: vless, uuid: c47eb7ab-2c2d-44e0-80cc-bb104f89a137, tls: true, servername: www.terence-tunnel.org, client-fingerprint: chrome, network: ws, ws-opts: {path: /tunnel, headers: {Host: www.terence-tunnel.org}}}
-- {name: 🇺🇸 美国 02, server: 67.209.184.133, port: 443, type: vless, uuid: 96ebc166-565c-474f-9712-7990b55c368a, tls: true, flow: xtls-rprx-vision, reality-opts: {public-key: Tp015Ga5LodBwKs4z7Wz4hTvqeh8-4q1EQPZqvZfWR0, short-id: ad09494d431b2b92}, servername: www.microsoft.com, client-fingerprint: chrome, network: tcp, udp: true}
-- {name: 🇺🇸 美国 03, server: 113.192.61.81, port: 443, type: vless, uuid: d86d0059-4cbb-47dc-9fce-f195cdea0baa, tls: true, flow: xtls-rprx-vision, reality-opts: {public-key: zw5MNczgSLEa-028P1l-zQnx76JbuJJzpr5oK0fTWGY, short-id: 33d1b1e583fb6c3a}, servername: www.microsoft.com, client-fingerprint: chrome, network: tcp}
-- {name: 🇺🇸 美国 04, server: 173.249.200.123, port: 443, type: vless, uuid: 1248e946-1d5e-4e9f-ac74-6c585b62ea4a, tls: true, flow: xtls-rprx-vision, reality-opts: {public-key: ODiM8V0qRy8vHtgYsrzxwSaQb7HKxtIdaba1X94BNmw, short-id: 6887c0}, servername: npm.dytst.dev, client-fingerprint: chrome, network: tcp}
-- {name: 🇺🇸 美国 05, server: 65.49.217.190, port: 23456, type: ss, cipher: aes-256-gcm, password: N2JiY2IxNjU3ZDg3, udp: true}
-- {name: 🇺🇸 美国 06, server: 65.49.201.187, port: 8443, type: vless, uuid: 517fb6f3-4a9a-40f1-bb91-be277b9f4040, tls: false, client-fingerprint: chrome, network: tcp}
-- {name: 🇺🇸 美国 07, server: 104.225.237.87, port: 443, type: vless, uuid: 2db85988-715e-4481-aad6-90605ca4736d, tls: true, packet-encoding: xudp, flow: xtls-rprx-vision, reality-opts: {public-key: LBeNoujOB6Su0ZKL5-sp51LkIZsNbPzE1xVhufJJaGc, short-id: b6bac1f358b14f15}, servername: www.microsoft.com, client-fingerprint: chrome, network: tcp, udp: true}
-- {name: 🇺🇸 美国 08, server: 154.64.230.33, port: 8388, type: ss, cipher: aes-128-gcm, password: hUpTyVncwTRLs5fEQHV1BEwzLy164EnE, udp: true}
-- {name: 🇺🇸 美国 09, server: 72.249.200.236, port: 50110, type: vless, uuid: db6dae29-44aa-4505-adf1-2f84d18e6923, tls: true, flow: xtls-rprx-vision, reality-opts: {public-key: DaNnEZgnobUTHGW3PbrHn6i6OwsCzfRfO1ccqLF2F0U}, servername: www.microsoft.com, client-fingerprint: chrome, network: tcp, udp: true}
-- {name: 🇺🇸 美国 10, server: 104.160.45.35, port: 38808, type: vmess, uuid: e619d224-0842-4576-a361-3ad2bf0c468c, alterId: 0, cipher: auto, tls: false, udp: true}
-- {name: 🇺🇸 美国 11, server: 104.17.125.11, port: 2053, type: vless, uuid: 8a93d9ba-6dc4-408d-bfa9-a79267ca3484, tls: true, servername: cdn.ylgagri.com, client-fingerprint: chrome, network: ws, ws-opts: {path: /1mnrp9o4as, headers: {Host: cdn.ylgagri.com}}}
-- {name: 🇺🇸 美国 12, server: 104.17.125.11, port: 2053, type: vless, uuid: 2c06e59e-74de-4a4b-8fcb-21ae1808c242, tls: true, servername: dmit2.ylgagri.com, client-fingerprint: chrome, network: ws, ws-opts: {path: /f758y9gpxd, headers: {Host: dmit2.ylgagri.com}}}
-- {name: 🇺🇸 美国 13, server: 104.17.125.11, port: 2053, type: vless, uuid: 584252c4-004a-4dcb-b775-9b1be8b4dc9d, tls: true, servername: bwg.ylgagri.com, client-fingerprint: chrome, network: ws, ws-opts: {path: /tdxe579l6n, headers: {Host: bwg.ylgagri.com}}}
-- {name: 🇺🇸 美国 14, server: 38.150.33.232, port: 12329, type: vless, uuid: 6faa980b-4a0f-4b4d-99f2-03b468da8541, tls: true, flow: xtls-rprx-vision, reality-opts: {public-key: dpG1tE9V93FM9IJeYC5-n_7RJxX7jOwrWLbQJgZpFFo}, servername: www.amazon.com, client-fingerprint: chrome, network: tcp}
-- {name: 🇺🇸 美国 15, server: 96.45.186.114, port: 443, type: vless, uuid: 59422e15-8dbc-4bf0-94cc-251aeaa3cfc8, tls: true, reality-opts: {public-key: 4fvb3WQqf_-xNuPR7ZBPq6qjesFph59-uUJbvqVcGWU, short-id: d964a956f645fc34}, servername: www.microsoft.com, client-fingerprint: chrome, network: tcp}
-- {name: 🇺🇸 美国 16, server: 66.112.209.213, port: 17045, type: vmess, uuid: 85171597-4bef-46a0-9bee-32e9c929f83f, alterId: 0, cipher: auto, tls: false, udp: true}
-- {name: 🇺🇸 美国 17, server: 144.34.183.144, port: 8388, type: ss, cipher: aes-128-gcm, password: Ub74ceYWwK5UkjBmLq42PYf-, udp: true}
-- {name: 🇺🇸 美国 18, server: 154.44.0.66, port: 8443, type: hysteria2, password: MAJwoDUk2HGN1b0us1OHDootA0P1S2sr, auth: MAJwoDUk2HGN1b0us1OHDootA0P1S2sr, sni: www.bing.com, skip-cert-verify: true, alpn: [h3], obfs: salamander, obfs-password: 5B2aqKwLl2n1QmNpr-YNgoaCJf3ZNMlo}
-- {name: 🇺🇸 美国 19, server: 67.216.197.62, port: 47831, type: hysteria2, password: BVmII8m7KrFMKGZIln0X5YMN, auth: BVmII8m7KrFMKGZIln0X5YMN, sni: www.microsoft.com, skip-cert-verify: true}
-- {name: 🇺🇸 美国 20, server: 104.160.40.178, port: 443, type: vless, uuid: 1ba59c9e-b827-4b41-a532-86df55f8535d, tls: true, flow: xtls-rprx-vision, reality-opts: {public-key: OLu8kkwCfKtarfC-FGBkabm6VndbagUjrLs8g9J1ggs, short-id: 16f185db}, servername: apple.com, client-fingerprint: chrome, network: tcp, udp: true}
-- {name: 🇺🇸 美国 21, server: 204.152.221.119, port: 4434, type: hysteria2, password: 28a91bb2-51fe-48e1-9865-ec8bc9e48890, auth: 28a91bb2-51fe-48e1-9865-ec8bc9e48890, sni: www.cloudflare.com, up: 50, down: 200, skip-cert-verify: true}
-- {name: 🇺🇸 美国 22, server: 154.201.75.111, port: 443, type: vless, uuid: f3324ba9-9549-4233-819d-bd174272f98f, tls: true, flow: xtls-rprx-vision, reality-opts: {public-key: ba5OCd_y9XX1nSp9K2m7vo4CmvLxP7fNZIiYh586DEk, short-id: 7522c803}, servername: www.microsoft.com, client-fingerprint: chrome, network: tcp, udp: true}
-- {name: 🇺🇸 美国 23, server: 154.29.150.17, port: 41239, type: vless, uuid: c5184ea4-de9f-499f-ab17-29c2d539a272, tls: true, flow: xtls-rprx-vision, reality-opts: {public-key: 4MjWEsqAOALwpUX8klWNcWpXU2T6mx8lW5RJlAHSn2E, short-id: c1c2395d6091}, servername: www.oracle.com, client-fingerprint: chrome, network: tcp, udp: true}
-- {name: 🇺🇸 美国 24, server: 65.49.200.192, port: 443, type: vless, uuid: 90c34677-70ee-4e91-8a54-5c37950b1a48, tls: true, flow: xtls-rprx-vision, reality-opts: {public-key: pguo7HLohzSCzjF7o03x_SiNMYigfEAmaJLoeMaFzCU, short-id: aa0bfca23d1d139d}, servername: www.microsoft.com, client-fingerprint: chrome, network: tcp, udp: true}
-- {name: 🇺🇸 美国 25, server: 104.160.44.100, port: 443, type: vless, uuid: 1c53f4e7-556c-4b4b-ac98-297b267d3887, tls: true, flow: xtls-rprx-vision, reality-opts: {public-key: r8Uf4sl1BvzGKuQhZCNdxnpExRyhVS11dqh55VMTwBc, short-id: b1a5404b27f37651}, servername: www.microsoft.com, client-fingerprint: chrome, network: tcp, udp: true}
-- {name: 🇺🇸 美国 26, server: 65.49.196.164, port: 53470, type: vmess, uuid: e8666faa-07ee-4f08-f770-df1411dceda8, alterId: 0, cipher: auto, tls: true, skip-cert-verify: true}
-- {name: 🇺🇸 美国 27, server: 66.112.210.73, port: 443, type: vless, uuid: 26e4d5fc-2f85-4b74-913b-1a408ad5a4ea, tls: true, flow: xtls-rprx-vision, reality-opts: {public-key: rJX7EsDoDLJWHSwFxemw40xyOHgVfkGk7isyaHJ0Lyg, short-id: f9218c9695f9d605}, servername: www.microsoft.com, client-fingerprint: chrome, network: tcp, udp: true}
-- {name: 🇺🇸 美国 28, server: 104.160.45.145, port: 443, type: vless, uuid: a46776a5-4b32-4ee9-9f48-cd2ea617c92f, tls: true, flow: xtls-rprx-vision, reality-opts: {public-key: Mc9nRm6InvZr6Chf-8Zf0GXqAF8LNprSfrmFcnMD_U0, short-id: 94dc7205}, servername: www.microsoft.com, client-fingerprint: chrome, network: tcp}
-- {name: 🇺🇸 美国 29, server: 38.244.6.124, port: 443, type: vless, uuid: de666289-2179-422a-84c7-a9e4cd239fe5, tls: true, flow: xtls-rprx-vision, reality-opts: {public-key: YVGGNbG6rvtpsO0egOp5dVw8enCBgqQh0QE9XqZezT0, short-id: 9a22c65e4e53b1c1}, servername: www.microsoft.com, client-fingerprint: chrome, network: tcp}
-- {name: 🇺🇸 美国 30, server: 185.239.71.250, port: 8388, type: ss, cipher: aes-256-gcm, password: 3n84BkLhcGF8Mioo, udp: true}
-- {name: 🇺🇸 美国 31, server: 154.40.40.35, port: 443, type: vless, uuid: 9065935d-86d0-4b7a-a443-2b4fcd83afad, tls: true, flow: xtls-rprx-vision, reality-opts: {public-key: 9eGdTjIn6ZNPhlTH_BCmcxwqhzNfQdc1UAAwobydWHQ, short-id: 81d77eaa77eee25c}, servername: www.microsoft.com, client-fingerprint: chrome, network: tcp, udp: true}
-- {name: 🇺🇸 美国 32, server: 154.29.150.16, port: 443, type: hysteria2, password: my_secure_password_123, auth: my_secure_password_123, sni: bing.com, skip-cert-verify: true}
-- {name: 🇺🇸 美国 33, server: 192.220.11.234, port: 443, type: vless, uuid: b466eac6-b7c8-44ab-bbce-96a4768d5b56, tls: true, servername: novixlink.706666.xyz, client-fingerprint: chrome, network: tcp, udp: true}
-- {name: 🇺🇸 美国 34, server: 154.17.9.250, port: 443, type: vless, uuid: a6a9b0be-bd51-4f99-b577-da882ed2ca46, tls: true, packet-encoding: xudp, flow: xtls-rprx-vision, reality-opts: {public-key: Si4nt6oGk3vDEBLSpu2tk7m_ThM-ZPSjvyebgHXF7wA, short-id: 2e044db1}, servername: www.microsoft.com, client-fingerprint: chrome, network: tcp, udp: true}
-- {name: 🇺🇸 美国 35, server: 67.209.190.63, port: 8443, type: hysteria2, password: Y0IhcUc9F2eGMmkgVlUqFN6qQDDec6rt, auth: Y0IhcUc9F2eGMmkgVlUqFN6qQDDec6rt, sni: www.bing.com, skip-cert-verify: true, alpn: [h3], obfs: salamander, obfs-password: _UzNjJ_SQOIcUs5H9J_Koo2jhswTIhvJ, udp: true}
-- {name: 🇺🇸 美国 36, server: 23.148.228.231, port: 8443, type: hysteria2, password: EWymwMZsbyTvP3mxon6R3v0PdLc6G5Tx, auth: EWymwMZsbyTvP3mxon6R3v0PdLc6G5Tx, sni: www.microsoft.com, skip-cert-verify: true}
-- {name: 🇺🇸 美国 37, server: 144.34.185.153, port: 46892, type: ss, cipher: aes-256-gcm, password: gXWA8EsQxTvo9veSpf6gBz/dpQV74JPg, udp: true}
-- {name: 🇺🇸 美国 38, server: 104.194.74.73, port: 443, type: vless, uuid: 6891825d-9591-4641-860f-47437440b7d2, tls: true, flow: xtls-rprx-vision, reality-opts: {public-key: 3lStX6qJZ0iauQNCfUquD-zAa46twAZQcU1YAUcfLWI, short-id: 1c621ffb3ee1eb17}, servername: www.apple.com, client-fingerprint: chrome, network: tcp, udp: true}
-- {name: 🇺🇸 美国 39, server: proxy.apricityx.top, port: 443, type: vless, uuid: 54ef0724-210a-4275-a2f4-4a3007146d5e, tls: true, alpn: [h2, http/1.1], packet-encoding: xudp, flow: xtls-rprx-vision, reality-opts: {public-key: dDV5GBmouKMmgsLvZZU9TbQuJxtrntk07cK-XT7TASM, short-id: 0686b874afca9d0c}, servername: www.leercapitulo.co, client-fingerprint: chrome, network: tcp, udp: true}
-- {name: 🇺🇸 美国 40, server: 98.142.241.245, port: 8388, type: ss, cipher: aes-128-gcm, password: hUpTyVncwTRLs5fEQHV1BEwzLy164EnE, udp: true}
-- {name: 🇺🇸 美国 41, server: 66.112.214.26, port: 443, type: vless, uuid: 490a11eb-e38a-4a85-b391-7175de597b80, tls: true, flow: xtls-rprx-vision, reality-opts: {public-key: ExoLmgvra4OkUzW08_tkUKCOpqZ-fp-sur_NqpRui1s}, servername: www.icloud.com, client-fingerprint: chrome, network: tcp, udp: true}
-- {name: 🇺🇸 美国 42, server: 65.49.221.226, port: 8388, type: ss, cipher: aes-256-gcm, password: dyiTjbGXKT8X0R7pSDah, udp: true}
-- {name: 🇺🇸 美国 43, server: 45.62.106.145, port: 8443, type: vless, uuid: a3054186-5e1d-4c95-a849-a79ee1e447b2, tls: false, client-fingerprint: chrome, network: ws, ws-opts: {path: /vless-ws}, udp: true}
-- {name: 🇺🇸 美国 44, server: 65.49.201.167, port: 443, type: hysteria2, password: aff3077c544f1b96, auth: aff3077c544f1b96, sni: bing.com, skip-cert-verify: true, udp: true}
-- {name: 🇺🇸 美国 45, server: 198.41.200.193, port: 443, type: vless, uuid: 9561cf04-205c-4592-8247-a1c0571077bd, tls: true, flow: xtls-rprx-vision, encryption: mlkem768x25519plus.native.0rtt.m6rE8PJvVvg8HkZ3ivfEu4abEqC2-2o_iZVK8tq5tKQGWzl5VdeUvczFEgdV2gVJhjyZdFih6-OEfWPI7xVtTUMwiUtTTWZ5gjCeKeNbPTOPmQMVZboDVZJmo_C56gKAk_TE8hutezo_AIKLOhag-gqnuBygappAbfWuMBasmbWgBIYnxvasjBRNvcJdwCgyGUFsLPiD_KOQ7HAQE-zM66eWHHKJAKAad7q6k8U2klh_2oACHUNogVpN08EcbBZgW5Y4iqKj0TimIvNl0xLJAAm7XEhKp_AK_eFb6HwlbRpJB7xCPYuUAqd91jualtogz6IKXAou8kKsN5EIC1WirrssNEV-PlcHJWk4CgGQJYXMXpJO7SLCohMcCTuQGiqvntbB4DlzupSqYTsJebSGagdApEaot3W1XpcW_fM--gDQrONgVakXyhu36xhzDHizeCIhhKPAvxCT9rG574K0I3wQVHaWswahjCKDWNZmZvKBidBOx0mGnSg3WJUQyXtUtWe4-dwANXeJ11dMGiNQBWZwhvpkfmcjh8UuAqtFxEYY-XssjAUj_JNjQCtiAyLJrvdHtTGBa7YGqeKnYnKsj9mJaLwuOgGgkSqSNwiNZkbOvqswJYIt54cN9qBfpFRgQZdL4FEAPWZTUgxhjEyrWFl87FaSyJqGUsZJe7myr8A5TrSoB9FIXHAKQeI-9qI7jXCfSGcinsQ9GHUasiezAhGQl_hccuNEBQQNWaHA5aYrxuyytfqxeCmLTGQ7v5SLIVSnVuAEbmN3tJoV8hQeUAYch3ByImU7KDwoGOd3meVfTldqNYNLe7S_equGaYIlfSkgNLXJtmEHeSB42Jom4MAqb_oK5vQMmqyPanoy9PKc7fbPC9zLm9Novip9nJIbQAZn4jlHgVgYQhoGrmBIpueRRzu5rCFmg2RfL7Vtm4Sq7qZJmxAl64IQjhFY3jcBjkCqM9oQQCuaiRgwJXAruuEKhyYYw4VMVDyDVdC70oZ3hVehtufAL7QmNnJR31tYbtTLoFEoG3CxUhphEEoMjrd0QmOexLqtMKQUXYtdy5CwqUA80UlJ0xMAUcFyptJNRxuV0mF-d2y3bfK8CSkT3-BrZES_gJxgQisqxtwEdMaXuXMT64iSa7pMyigYouZq8xaVPxeZnXx1yTuJdHhcxOs2_jPMirgCu1ivHpKfM9tAwnLLHUGkAZKa3rhflIhM3EPLPiuqSxXLsLUEDbqEAiFmbyHBGlJuC4csZZMMzYmVS7uQC3IDoSBBByUvIGZDbRqNKRkmawwFycOgXYscvxMMT9IbZJmw2NQ8Bqe-kuU3mPdE2_VNtqxz9PthR3Ftbfq_4AMEelR7C0Ic6VFBp7IMAFWBWlSNRFA5gKqPaKirRAkUl1ucxjOEJiQ5NCJx20rCgqFFU0SdxYsmSTAyofZxjpUaU2EoO6ytpUMvagoKY3pI1EQbq2U-DjyufFMRv9sgt2EJZUAoL-YgqsK_J0FNr7qZsqRvAjE2njwXzpazl1xrgSm4f0iF47in0vet5pQFOjz-WbRY7B5TXbZVf37TPKYDHna547zdD57QQ0Y, servername: sum1984.dpdns.org, client-fingerprint: chrome, network: ws, ws-opts: {path: 9561cf04-205c-4592-8247-a1c0571077bd-vw, headers: {Host: sum1984.dpdns.org}}}
-- {name: 🇺🇸 美国 46, server: 198.41.192.27, port: 80, type: vless, uuid: 9561cf04-205c-4592-8247-a1c0571077bd, tls: false, flow: xtls-rprx-vision, encryption: mlkem768x25519plus.native.0rtt.m6rE8PJvVvg8HkZ3ivfEu4abEqC2-2o_iZVK8tq5tKQGWzl5VdeUvczFEgdV2gVJhjyZdFih6-OEfWPI7xVtTUMwiUtTTWZ5gjCeKeNbPTOPmQMVZboDVZJmo_C56gKAk_TE8hutezo_AIKLOhag-gqnuBygappAbfWuMBasmbWgBIYnxvasjBRNvcJdwCgyGUFsLPiD_KOQ7HAQE-zM66eWHHKJAKAad7q6k8U2klh_2oACHUNogVpN08EcbBZgW5Y4iqKj0TimIvNl0xLJAAm7XEhKp_AK_eFb6HwlbRpJB7xCPYuUAqd91jualtogz6IKXAou8kKsN5EIC1WirrssNEV-PlcHJWk4CgGQJYXMXpJO7SLCohMcCTuQGiqvntbB4DlzupSqYTsJebSGagdApEaot3W1XpcW_fM--gDQrONgVakXyhu36xhzDHizeCIhhKPAvxCT9rG574K0I3wQVHaWswahjCKDWNZmZvKBidBOx0mGnSg3WJUQyXtUtWe4-dwANXeJ11dMGiNQBWZwhvpkfmcjh8UuAqtFxEYY-XssjAUj_JNjQCtiAyLJrvdHtTGBa7YGqeKnYnKsj9mJaLwuOgGgkSqSNwiNZkbOvqswJYIt54cN9qBfpFRgQZdL4FEAPWZTUgxhjEyrWFl87FaSyJqGUsZJe7myr8A5TrSoB9FIXHAKQeI-9qI7jXCfSGcinsQ9GHUasiezAhGQl_hccuNEBQQNWaHA5aYrxuyytfqxeCmLTGQ7v5SLIVSnVuAEbmN3tJoV8hQeUAYch3ByImU7KDwoGOd3meVfTldqNYNLe7S_equGaYIlfSkgNLXJtmEHeSB42Jom4MAqb_oK5vQMmqyPanoy9PKc7fbPC9zLm9Novip9nJIbQAZn4jlHgVgYQhoGrmBIpueRRzu5rCFmg2RfL7Vtm4Sq7qZJmxAl64IQjhFY3jcBjkCqM9oQQCuaiRgwJXAruuEKhyYYw4VMVDyDVdC70oZ3hVehtufAL7QmNnJR31tYbtTLoFEoG3CxUhphEEoMjrd0QmOexLqtMKQUXYtdy5CwqUA80UlJ0xMAUcFyptJNRxuV0mF-d2y3bfK8CSkT3-BrZES_gJxgQisqxtwEdMaXuXMT64iSa7pMyigYouZq8xaVPxeZnXx1yTuJdHhcxOs2_jPMirgCu1ivHpKfM9tAwnLLHUGkAZKa3rhflIhM3EPLPiuqSxXLsLUEDbqEAiFmbyHBGlJuC4csZZMMzYmVS7uQC3IDoSBBByUvIGZDbRqNKRkmawwFycOgXYscvxMMT9IbZJmw2NQ8Bqe-kuU3mPdE2_VNtqxz9PthR3Ftbfq_4AMEelR7C0Ic6VFBp7IMAFWBWlSNRFA5gKqPaKirRAkUl1ucxjOEJiQ5NCJx20rCgqFFU0SdxYsmSTAyofZxjpUaU2EoO6ytpUMvagoKY3pI1EQbq2U-DjyufFMRv9sgt2EJZUAoL-YgqsK_J0FNr7qZsqRvAjE2njwXzpazl1xrgSm4f0iF47in0vet5pQFOjz-WbRY7B5TXbZVf37TPKYDHna547zdD57QQ0Y, client-fingerprint: chrome, network: ws, ws-opts: {path: 9561cf04-205c-4592-8247-a1c0571077bd-vw, headers: {Host: sum1984.dpdns.org}}}
-- {name: 🇺🇸 美国 47, server: 104.194.74.14, port: 443, type: vless, uuid: 2f56719f-d1dd-442d-a13c-ddbea23f1ab1, tls: true, flow: xtls-rprx-vision, reality-opts: {public-key: GmSrU6Wv8pYT96TE080sn1EzQnZ3j0Ea7usrxET7ol8, short-id: 8d008277}, servername: www.apple.com, client-fingerprint: chrome, network: tcp, udp: true}
-- {name: 🇺🇸 美国 48, server: www.pvccabinets.com, port: 56203, type: vless, uuid: d9f22672-2dda-423b-8228-552a1e137a65, tls: true, servername: www.pvccabinets.com, client-fingerprint: chrome, network: ws, ws-opts: {path: /ws, headers: {Host: www.pvccabinets.com}}, udp: true}
-- {name: 🇺🇸 美国 49, server: 64.83.31.25, port: 443, type: vless, uuid: 6c8e8c20-b27b-4b54-b2b9-b1f11a91f81a, tls: true, flow: xtls-rprx-vision, reality-opts: {public-key: wg_aSbYWQ2wxEUYFo84asDE8iZOy1gLNg63ybkZ-wGk, short-id: 2c4c8ba1bb21ce7a}, servername: www.cloudflare.com, client-fingerprint: chrome, network: tcp, udp: true}
-- {name: 🇺🇸 美国 50, server: node.erek.space, port: 9443, type: vless, uuid: 840a617f-8112-4fef-a259-8cc29edb633c, tls: true, flow: xtls-rprx-vision, reality-opts: {public-key: 9xa5Ajcz0cWxLSIN4fimIsKIo0f8uys2xpo2OLAwRB4, short-id: 60b74c6e6a4f0bf5}, servername: www.ibm.com, client-fingerprint: chrome, network: tcp}
-- {name: 🇺🇸 美国 51, server: 67.216.202.155, port: 443, type: vless, uuid: bfc203ab-e5b9-42e0-98ef-ca94fb71eb81, tls: true, flow: xtls-rprx-vision, reality-opts: {public-key: 5Uzpm2y3OVllLTq2YzJFnpP3ho1UwsS8FeFbCC460ww, short-id: 5d8eb8b0e709e817}, servername: www.debian.org, client-fingerprint: firefox, network: tcp, udp: true}
-- {name: 🇺🇸 美国 52, server: 199.115.230.7, port: 444, type: vmess, uuid: b0d82c36-4e2f-4f3a-9a15-8c5d6e7f1a2b, alterId: 0, cipher: auto, tls: false, network: ws, ws-opts: {path: /ray}, udp: true}
-- {name: 🇺🇸 美国 53, server: 176.122.172.186, port: 10086, type: vmess, uuid: 3171efcf-1bdd-423a-956e-dadf43113692, alterId: 0, cipher: auto, tls: false}
-- {name: 🇩🇪 德国 01, server: 185.254.74.247, port: 8443, type: ss, cipher: aes-256-gcm, password: QigeSS2026!Secure#Proxy}
+- {name: 香港 01, server: 165.154.193.165, port: 443, type: hysteria2, password: qtMKhrFAMrVZUfupkc5CFHmRKYtNPSjt, auth: qtMKhrFAMrVZUfupkc5CFHmRKYtNPSjt, sni: 165.154.193.165, skip-cert-verify: true, obfs: salamander, obfs-password: d7897b996af77eeecb7ac010361d74fb, udp: true}
+- {name: 香港 02, server: 64.90.0.209, port: 8448, type: vless, uuid: c595888b-36ca-45ed-bf5a-985dd6bf48f1, tls: true, servername: v.idudu.xyz, network: ws, ws-opts: {path: /ws, headers: {Host: v.idudu.xyz}}, udp: true}
+- {name: 香港 03, server: guodaxian.xyz, port: 8443, type: hysteria2, password: 5c2e4f8a-1b3d-4e7f-9a0c-6d8b2f1e3a7d, auth: 5c2e4f8a-1b3d-4e7f-9a0c-6d8b2f1e3a7d, sni: guodaxian.xyz, udp: true}
+- {name: 香港 04, server: 45.125.33.242, port: 8080, type: vmess, uuid: a0000000-0000-4000-8000-000000000009, alterId: 0, cipher: auto, tls: false}
+- {name: 香港 05, server: 156.226.183.181, port: 54321, type: vmess, uuid: d3bcc1f1-6294-4f68-bcf3-c3bcb2001520, alterId: 0, cipher: auto, tls: false, udp: true}
+- {name: 香港 06, server: 23.26.201.55, port: 8388, type: ss, cipher: aes-256-gcm, password: HKproxy2026!, udp: true}
+- {name: 香港 07, server: 118.193.34.241, port: 443, type: vless, uuid: 09489038-d83a-4db7-bb54-1e264bb39a11, tls: true, flow: xtls-rprx-vision, reality-opts: {public-key: 0PIHIn25s6JOnKbej_J-iMwd80KzYU87UPLy6ZVy8D4, short-id: 037b12c65138375d}, servername: www.microsoft.com, client-fingerprint: chrome, network: tcp, udp: true}
+- {name: 香港 08, server: px2.5ibtc.cn, port: 443, type: vless, uuid: 326227e2-f2d1-4f43-8715-9da854f5f4c0, tls: true, servername: px2.5ibtc.cn, network: ws, ws-opts: {path: /326227e2-f2d1-4f43-8715-9da854f5f4c0, headers: {Host: px2.5ibtc.cn}}}
+- {name: 香港 09, server: 45.207.205.70, port: 443, type: vless, uuid: e1006017-dc10-4929-a5f3-919185ce8573, tls: true, flow: xtls-rprx-vision, reality-opts: {public-key: auBLZhjoptmkNKibdcrj-zrHFze_m-Vjfp9L1gsObjg, short-id: 520c729163dbb315}, servername: www.microsoft.com, client-fingerprint: chrome, network: tcp, udp: true}
+- {name: 香港 10, server: mz.hkychina.com, port: 8443, type: hysteria2, password: HysTeria2026!Proxy, auth: HysTeria2026!Proxy, sni: mz.hkychina.com, up: 50 mib, down: 500 mib, skip-cert-verify: false}
+- {name: 日本 01, server: 154.36.155.204, port: 45679, type: vless, uuid: 87e21476-633a-4961-afc5-aee16b6e8b06, tls: true, flow: xtls-rprx-vision, reality-opts: {public-key: qPBYczIxq7MUMJhk0uYjFcf7Vjq1pODNA_XukzHC_iQ, short-id: dcad52}, servername: www.oracle.com, client-fingerprint: chrome, network: tcp}
+- {name: 日本 02, server: 64.83.38.190, port: 443, type: vless, uuid: 5f4715a3-2b48-442c-bc19-23c037a3c1ff, tls: true, flow: xtls-rprx-vision, reality-opts: {public-key: ZfNO7HLq4kesTVEvdgm7DeVz4DFEM4j7QVGsWl78dVE, short-id: b8fdfa03fef48e41}, servername: www.microsoft.com, client-fingerprint: chrome, network: tcp, udp: true}
+- {name: 日本 03, server: 103.53.80.153, port: 8443, type: vless, uuid: 5cde3437-63f9-4c47-b644-92ce4823a533, tls: true, flow: xtls-rprx-vision, reality-opts: {public-key: pbSrOiVMfNOqnQoizBkVRx5chq14DmAInYj-3wySOBA, short-id: 365f5a7486a54dd7}, servername: www.microsoft.com, client-fingerprint: chrome, network: tcp}
+- {name: 日本 04, server: 154.36.185.115, port: 443, type: vless, uuid: 6cbf2ded-5b0f-475f-bc17-a5314e13977e, tls: true, flow: xtls-rprx-vision, reality-opts: {public-key: 4pxrcnxn8xnYz25AkJYT8zEWv6bVJKBA--mEHeuaGxw, short-id: 2fdef909f3394cb7}, servername: www.microsoft.com, client-fingerprint: chrome, network: tcp, udp: true}
+- {name: 日本 05, server: 64.83.34.73, port: 8443, type: vless, uuid: a6e863f5-68b7-4b40-ae13-2c548ab9cd4d, tls: true, flow: xtls-rprx-vision, reality-opts: {public-key: 7Ges2JjA6bVgHOQVFjjuMoyTFkd1WsH_JazeK7xob1o, short-id: bea0f01d30923934}, servername: www.microsoft.com, client-fingerprint: chrome, network: tcp, udp: true}
+- {name: 日本 06, server: 154.36.181.161, port: 17000, type: vless, uuid: b56feff5-2066-4029-a712-b2db8d4294ca, tls: true, flow: xtls-rprx-vision, reality-opts: {public-key: 9x8WqTf_HavdW2jAxznLsH8kToc8Y6ygWtV9cB8eE3E, short-id: 125b9407}, servername: apple.com, client-fingerprint: chrome, network: tcp}
+- {name: 日本 07, server: 202.182.101.137, port: 10000, type: hysteria2, password: +RZ4w9T09t4BVUZVHA1tGg==, auth: +RZ4w9T09t4BVUZVHA1tGg==, sni: www.microsoft.com, up: 100, down: 500, skip-cert-verify: true}
+- {name: 日本 08, server: 207.148.109.142, port: 37128, type: hysteria2, password: 57727b3d-2ab5-41e0-9675-aed639774e4b, auth: 57727b3d-2ab5-41e0-9675-aed639774e4b, sni: www.ebay.com, up: 50, down: 200, skip-cert-verify: true}
+- {name: 日本 09, server: 167.179.114.107, port: 443, type: vless, uuid: f27b2849-80d4-40ea-aca6-12f513f62e42, tls: true, flow: xtls-rprx-vision, reality-opts: {public-key: Bfsx1z2bey96T7SwAzexhi6Hlf8Dnq75W4ryGRH1RVs, short-id: ae335a3381a4cc2c}, servername: www.microsoft.com, client-fingerprint: chrome, network: tcp, udp: true}
+- {name: 日本 10, server: 45.77.29.67, port: 443, type: vless, uuid: da71c5d2-1414-4de8-ba2f-581e1d3ed1eb, tls: true, flow: xtls-rprx-vision, reality-opts: {public-key: PhUvQpJguwlEKmdBiX-pdmUOeyu8oEQOLhWRskU7s3o, short-id: 8ab28f6d64a8}, servername: www.amazon.com, client-fingerprint: chrome, network: tcp, udp: true}
+- {name: 日本 11, server: 45.32.57.118, port: 4433, type: vmess, uuid: 35b89832-0a7c-48dd-8d1c-a2891b522195, alterId: 0, cipher: auto, tls: false, skip-cert-verify: true, udp: true}
+- {name: 日本 12, server: oc.imfun.fun, port: 18112, type: vmess, uuid: ad45f8f6-0f0a-4cc4-b907-c4582407dc94, alterId: 0, cipher: auto, tls: false, skip-cert-verify: true, udp: true}
+- {name: 日本 13, server: 38.207.137.68, port: 58834, type: vless, uuid: e38a6892-1468-498e-b26b-28659e90ded4, tls: false, network: tcp}
+- {name: 日本 14, server: pq.aws50.yydjc.top, port: 443, type: vless, uuid: 74258422-dd39-4b95-8baf-ef8acbf9ff9e, tls: true, flow: xtls-rprx-vision, reality-opts: {public-key: pR8CV43xvSgvzSXPVLCVomjw-yZvNyqU32kietO2pEc, short-id: a6115a2c}, servername: iosapps.itunes.apple.com, client-fingerprint: ios, network: tcp, udp: true}
+- {name: 日本 15, server: 43.239.249.156, port: 443, type: hysteria2, password: s5vnxYINaom3GX8/kwt5Xa4cW9TbhnHk, auth: s5vnxYINaom3GX8/kwt5Xa4cW9TbhnHk, sni: www.microsoft.com, skip-cert-verify: true}
+- {name: 日本 16, server: 144.34.183.80, port: 443, type: vless, uuid: 2e11313c-5cef-470e-99a5-e4cf2b4bb5a5, tls: true, flow: xtls-rprx-vision, reality-opts: {public-key: u2xj5VE8_y0ziMVdQNMBCfuOOl_t_jddfIcG-dI5dxg, short-id: 01041646a3fee44e}, servername: www.apple.com, client-fingerprint: chrome, network: tcp, udp: true}
+- {name: 日本 17, server: 154.36.159.209, port: 443, type: vless, uuid: abd82a26-e957-4a08-bb22-63755a71ab01, tls: true, flow: xtls-rprx-vision, reality-opts: {public-key: qKtk8iy4InApOWBItS7WDYujvWcySg9DLNQRa0ztBUg, short-id: ccd16a8d6fd03f53}, servername: www.microsoft.com, client-fingerprint: chrome, network: tcp}
+- {name: 日本 18, server: 38.175.203.11, port: 443, type: vless, uuid: 1b8ec962-6e6f-4fc3-a9a4-c8a6fc907796, tls: true, servername: oulucloud.706666.xyz, client-fingerprint: chrome, network: tcp, udp: true}
+- {name: 新加坡 01, server: 96.9.231.250, port: 29560, type: vless, uuid: d69421f6-d4f2-424f-b919-6ec595210023, tls: true, flow: xtls-rprx-vision, reality-opts: {public-key: b6SP0i26ZFnU679c-eMXlBh69gzk-BpuPMdIaTKVbh0, short-id: 8a584baf8505ce06}, servername: www.microsoft.com, client-fingerprint: chrome, network: tcp, udp: true}
+- {name: 新加坡 02, server: 172.93.186.31, port: 443, type: vless, uuid: d56c8315-1951-4c30-ab91-06ef3700b4ba, tls: true, flow: xtls-rprx-vision, servername: 172.93.186.31, client-fingerprint: chrome, network: tcp, udp: true}
+- {name: 美国 01, server: www.terence-tunnel.org, port: 443, type: vless, uuid: c47eb7ab-2c2d-44e0-80cc-bb104f89a137, tls: true, servername: www.terence-tunnel.org, network: ws, ws-opts: {path: /tunnel, headers: {Host: www.terence-tunnel.org}}}
+- {name: 美国 02, server: 67.209.184.133, port: 443, type: vless, uuid: 96ebc166-565c-474f-9712-7990b55c368a, tls: true, flow: xtls-rprx-vision, reality-opts: {public-key: Tp015Ga5LodBwKs4z7Wz4hTvqeh8-4q1EQPZqvZfWR0, short-id: ad09494d431b2b92}, servername: www.microsoft.com, client-fingerprint: chrome, network: tcp, udp: true}
+- {name: 美国 03, server: 113.192.61.81, port: 443, type: vless, uuid: d86d0059-4cbb-47dc-9fce-f195cdea0baa, tls: true, flow: xtls-rprx-vision, reality-opts: {public-key: zw5MNczgSLEa-028P1l-zQnx76JbuJJzpr5oK0fTWGY, short-id: 33d1b1e583fb6c3a}, servername: www.microsoft.com, client-fingerprint: chrome, network: tcp}
+- {name: 美国 04, server: 173.249.200.123, port: 443, type: vless, uuid: 1248e946-1d5e-4e9f-ac74-6c585b62ea4a, tls: true, flow: xtls-rprx-vision, reality-opts: {public-key: ODiM8V0qRy8vHtgYsrzxwSaQb7HKxtIdaba1X94BNmw, short-id: 6887c0}, servername: npm.dytst.dev, client-fingerprint: chrome, network: tcp}
+- {name: 美国 05, server: 65.49.217.190, port: 23456, type: ss, cipher: aes-256-gcm, password: N2JiY2IxNjU3ZDg3, udp: true}
+- {name: 美国 06, server: 65.49.201.187, port: 8443, type: vless, uuid: 517fb6f3-4a9a-40f1-bb91-be277b9f4040, tls: false, network: tcp}
+- {name: 美国 07, server: 104.225.237.87, port: 443, type: vless, uuid: 2db85988-715e-4481-aad6-90605ca4736d, tls: true, packet-encoding: xudp, flow: xtls-rprx-vision, reality-opts: {public-key: LBeNoujOB6Su0ZKL5-sp51LkIZsNbPzE1xVhufJJaGc, short-id: b6bac1f358b14f15}, servername: www.microsoft.com, client-fingerprint: chrome, network: tcp, udp: true}
+- {name: 美国 08, server: 154.64.230.33, port: 8388, type: ss, cipher: aes-128-gcm, password: hUpTyVncwTRLs5fEQHV1BEwzLy164EnE, udp: true}
+- {name: 美国 09, server: 72.249.200.236, port: 50110, type: vless, uuid: db6dae29-44aa-4505-adf1-2f84d18e6923, tls: true, flow: xtls-rprx-vision, reality-opts: {public-key: DaNnEZgnobUTHGW3PbrHn6i6OwsCzfRfO1ccqLF2F0U}, servername: www.microsoft.com, client-fingerprint: chrome, network: tcp, udp: true}
+- {name: 美国 10, server: 104.160.45.35, port: 38808, type: vmess, uuid: e619d224-0842-4576-a361-3ad2bf0c468c, alterId: 0, cipher: auto, tls: false, udp: true}
+- {name: 美国 11, server: 104.17.125.11, port: 2053, type: vless, uuid: 8a93d9ba-6dc4-408d-bfa9-a79267ca3484, tls: true, servername: cdn.ylgagri.com, client-fingerprint: chrome, network: ws, ws-opts: {path: /1mnrp9o4as, headers: {Host: cdn.ylgagri.com}}}
+- {name: 美国 12, server: 104.17.125.11, port: 2053, type: vless, uuid: 2c06e59e-74de-4a4b-8fcb-21ae1808c242, tls: true, servername: dmit2.ylgagri.com, client-fingerprint: chrome, network: ws, ws-opts: {path: /f758y9gpxd, headers: {Host: dmit2.ylgagri.com}}}
+- {name: 美国 13, server: 104.17.125.11, port: 2053, type: vless, uuid: 584252c4-004a-4dcb-b775-9b1be8b4dc9d, tls: true, servername: bwg.ylgagri.com, client-fingerprint: chrome, network: ws, ws-opts: {path: /tdxe579l6n, headers: {Host: bwg.ylgagri.com}}}
+- {name: 美国 14, server: 38.150.33.232, port: 12329, type: vless, uuid: 6faa980b-4a0f-4b4d-99f2-03b468da8541, tls: true, flow: xtls-rprx-vision, reality-opts: {public-key: dpG1tE9V93FM9IJeYC5-n_7RJxX7jOwrWLbQJgZpFFo}, servername: www.amazon.com, client-fingerprint: chrome, network: tcp}
+- {name: 美国 15, server: 96.45.186.114, port: 443, type: vless, uuid: 59422e15-8dbc-4bf0-94cc-251aeaa3cfc8, tls: true, reality-opts: {public-key: 4fvb3WQqf_-xNuPR7ZBPq6qjesFph59-uUJbvqVcGWU, short-id: d964a956f645fc34}, servername: www.microsoft.com, client-fingerprint: chrome, network: tcp}
+- {name: 美国 16, server: 66.112.209.213, port: 17045, type: vmess, uuid: 85171597-4bef-46a0-9bee-32e9c929f83f, alterId: 0, cipher: auto, tls: false, udp: true}
+- {name: 美国 17, server: 144.34.183.144, port: 8388, type: ss, cipher: aes-128-gcm, password: Ub74ceYWwK5UkjBmLq42PYf-, udp: true}
+- {name: 美国 18, server: 154.44.0.66, port: 8443, type: hysteria2, password: MAJwoDUk2HGN1b0us1OHDootA0P1S2sr, auth: MAJwoDUk2HGN1b0us1OHDootA0P1S2sr, sni: www.bing.com, skip-cert-verify: true, alpn: [h3], obfs: salamander, obfs-password: 5B2aqKwLl2n1QmNpr-YNgoaCJf3ZNMlo}
+- {name: 美国 19, server: 67.216.197.62, port: 47831, type: hysteria2, password: BVmII8m7KrFMKGZIln0X5YMN, auth: BVmII8m7KrFMKGZIln0X5YMN, sni: www.microsoft.com, skip-cert-verify: true}
+- {name: 美国 20, server: 104.160.40.178, port: 443, type: vless, uuid: 1ba59c9e-b827-4b41-a532-86df55f8535d, tls: true, flow: xtls-rprx-vision, reality-opts: {public-key: OLu8kkwCfKtarfC-FGBkabm6VndbagUjrLs8g9J1ggs, short-id: 16f185db}, servername: apple.com, client-fingerprint: chrome, network: tcp, udp: true}
+- {name: 美国 21, server: 204.152.221.119, port: 4434, type: hysteria2, password: 28a91bb2-51fe-48e1-9865-ec8bc9e48890, auth: 28a91bb2-51fe-48e1-9865-ec8bc9e48890, sni: www.cloudflare.com, up: 50, down: 200, skip-cert-verify: true}
+- {name: 美国 22, server: 154.201.75.111, port: 443, type: vless, uuid: f3324ba9-9549-4233-819d-bd174272f98f, tls: true, flow: xtls-rprx-vision, reality-opts: {public-key: ba5OCd_y9XX1nSp9K2m7vo4CmvLxP7fNZIiYh586DEk, short-id: 7522c803}, servername: www.microsoft.com, client-fingerprint: chrome, network: tcp, udp: true}
+- {name: 美国 23, server: 154.29.150.17, port: 41239, type: vless, uuid: c5184ea4-de9f-499f-ab17-29c2d539a272, tls: true, flow: xtls-rprx-vision, reality-opts: {public-key: 4MjWEsqAOALwpUX8klWNcWpXU2T6mx8lW5RJlAHSn2E, short-id: c1c2395d6091}, servername: www.oracle.com, client-fingerprint: chrome, network: tcp, udp: true}
+- {name: 美国 24, server: 65.49.200.192, port: 443, type: vless, uuid: 90c34677-70ee-4e91-8a54-5c37950b1a48, tls: true, flow: xtls-rprx-vision, reality-opts: {public-key: pguo7HLohzSCzjF7o03x_SiNMYigfEAmaJLoeMaFzCU, short-id: aa0bfca23d1d139d}, servername: www.microsoft.com, client-fingerprint: chrome, network: tcp, udp: true}
+- {name: 美国 25, server: 104.160.44.100, port: 443, type: vless, uuid: 1c53f4e7-556c-4b4b-ac98-297b267d3887, tls: true, flow: xtls-rprx-vision, reality-opts: {public-key: r8Uf4sl1BvzGKuQhZCNdxnpExRyhVS11dqh55VMTwBc, short-id: b1a5404b27f37651}, servername: www.microsoft.com, client-fingerprint: chrome, network: tcp, udp: true}
+- {name: 美国 26, server: 65.49.196.164, port: 53470, type: vmess, uuid: e8666faa-07ee-4f08-f770-df1411dceda8, alterId: 0, cipher: auto, tls: true, skip-cert-verify: true}
+- {name: 美国 27, server: 66.112.210.73, port: 443, type: vless, uuid: 26e4d5fc-2f85-4b74-913b-1a408ad5a4ea, tls: true, flow: xtls-rprx-vision, reality-opts: {public-key: rJX7EsDoDLJWHSwFxemw40xyOHgVfkGk7isyaHJ0Lyg, short-id: f9218c9695f9d605}, servername: www.microsoft.com, client-fingerprint: chrome, network: tcp, udp: true}
+- {name: 美国 28, server: 104.160.45.145, port: 443, type: vless, uuid: a46776a5-4b32-4ee9-9f48-cd2ea617c92f, tls: true, flow: xtls-rprx-vision, reality-opts: {public-key: Mc9nRm6InvZr6Chf-8Zf0GXqAF8LNprSfrmFcnMD_U0, short-id: 94dc7205}, servername: www.microsoft.com, client-fingerprint: chrome, network: tcp}
+- {name: 美国 29, server: 38.244.6.124, port: 443, type: vless, uuid: de666289-2179-422a-84c7-a9e4cd239fe5, tls: true, flow: xtls-rprx-vision, reality-opts: {public-key: YVGGNbG6rvtpsO0egOp5dVw8enCBgqQh0QE9XqZezT0, short-id: 9a22c65e4e53b1c1}, servername: www.microsoft.com, client-fingerprint: chrome, network: tcp}
+- {name: 美国 30, server: 185.239.71.250, port: 8388, type: ss, cipher: aes-256-gcm, password: 3n84BkLhcGF8Mioo, udp: true}
+- {name: 美国 31, server: 154.40.40.35, port: 443, type: vless, uuid: 9065935d-86d0-4b7a-a443-2b4fcd83afad, tls: true, flow: xtls-rprx-vision, reality-opts: {public-key: 9eGdTjIn6ZNPhlTH_BCmcxwqhzNfQdc1UAAwobydWHQ, short-id: 81d77eaa77eee25c}, servername: www.microsoft.com, client-fingerprint: chrome, network: tcp, udp: true}
+- {name: 美国 32, server: 154.29.150.16, port: 443, type: hysteria2, password: my_secure_password_123, auth: my_secure_password_123, sni: bing.com, skip-cert-verify: true}
+- {name: 美国 33, server: 192.220.11.234, port: 443, type: vless, uuid: b466eac6-b7c8-44ab-bbce-96a4768d5b56, tls: true, servername: novixlink.706666.xyz, client-fingerprint: chrome, network: tcp, udp: true}
+- {name: 美国 34, server: 154.17.9.250, port: 443, type: vless, uuid: a6a9b0be-bd51-4f99-b577-da882ed2ca46, tls: true, packet-encoding: xudp, flow: xtls-rprx-vision, reality-opts: {public-key: Si4nt6oGk3vDEBLSpu2tk7m_ThM-ZPSjvyebgHXF7wA, short-id: 2e044db1}, servername: www.microsoft.com, client-fingerprint: chrome, network: tcp, udp: true}
+- {name: 美国 35, server: 67.209.190.63, port: 8443, type: hysteria2, password: Y0IhcUc9F2eGMmkgVlUqFN6qQDDec6rt, auth: Y0IhcUc9F2eGMmkgVlUqFN6qQDDec6rt, sni: www.bing.com, skip-cert-verify: true, alpn: [h3], obfs: salamander, obfs-password: _UzNjJ_SQOIcUs5H9J_Koo2jhswTIhvJ, udp: true}
+- {name: 美国 36, server: 23.148.228.231, port: 8443, type: hysteria2, password: EWymwMZsbyTvP3mxon6R3v0PdLc6G5Tx, auth: EWymwMZsbyTvP3mxon6R3v0PdLc6G5Tx, sni: www.microsoft.com, skip-cert-verify: true}
+- {name: 美国 37, server: 144.34.185.153, port: 46892, type: ss, cipher: aes-256-gcm, password: gXWA8EsQxTvo9veSpf6gBz/dpQV74JPg, udp: true}
+- {name: 美国 38, server: 104.194.74.73, port: 443, type: vless, uuid: 6891825d-9591-4641-860f-47437440b7d2, tls: true, flow: xtls-rprx-vision, reality-opts: {public-key: 3lStX6qJZ0iauQNCfUquD-zAa46twAZQcU1YAUcfLWI, short-id: 1c621ffb3ee1eb17}, servername: www.apple.com, client-fingerprint: chrome, network: tcp, udp: true}
+- {name: 美国 39, server: proxy.apricityx.top, port: 443, type: vless, uuid: 54ef0724-210a-4275-a2f4-4a3007146d5e, tls: true, alpn: [h2, http/1.1], packet-encoding: xudp, flow: xtls-rprx-vision, reality-opts: {public-key: dDV5GBmouKMmgsLvZZU9TbQuJxtrntk07cK-XT7TASM, short-id: 0686b874afca9d0c}, servername: www.leercapitulo.co, client-fingerprint: chrome, network: tcp, udp: true}
+- {name: 美国 40, server: 98.142.241.245, port: 8388, type: ss, cipher: aes-128-gcm, password: hUpTyVncwTRLs5fEQHV1BEwzLy164EnE, udp: true}
+- {name: 美国 41, server: 66.112.214.26, port: 443, type: vless, uuid: 490a11eb-e38a-4a85-b391-7175de597b80, tls: true, flow: xtls-rprx-vision, reality-opts: {public-key: ExoLmgvra4OkUzW08_tkUKCOpqZ-fp-sur_NqpRui1s}, servername: www.icloud.com, client-fingerprint: chrome, network: tcp, udp: true}
+- {name: 美国 42, server: 65.49.221.226, port: 8388, type: ss, cipher: aes-256-gcm, password: dyiTjbGXKT8X0R7pSDah, udp: true}
+- {name: 美国 43, server: 45.62.106.145, port: 8443, type: vless, uuid: a3054186-5e1d-4c95-a849-a79ee1e447b2, tls: false, network: ws, ws-opts: {path: /vless-ws}, udp: true}
+- {name: 美国 44, server: 65.49.201.167, port: 443, type: hysteria2, password: aff3077c544f1b96, auth: aff3077c544f1b96, sni: bing.com, skip-cert-verify: true, udp: true}
+- {name: 美国 45, server: 198.41.200.193, port: 443, type: vless, uuid: 9561cf04-205c-4592-8247-a1c0571077bd, tls: true, flow: xtls-rprx-vision, encryption: mlkem768x25519plus.native.0rtt.m6rE8PJvVvg8HkZ3ivfEu4abEqC2-2o_iZVK8tq5tKQGWzl5VdeUvczFEgdV2gVJhjyZdFih6-OEfWPI7xVtTUMwiUtTTWZ5gjCeKeNbPTOPmQMVZboDVZJmo_C56gKAk_TE8hutezo_AIKLOhag-gqnuBygappAbfWuMBasmbWgBIYnxvasjBRNvcJdwCgyGUFsLPiD_KOQ7HAQE-zM66eWHHKJAKAad7q6k8U2klh_2oACHUNogVpN08EcbBZgW5Y4iqKj0TimIvNl0xLJAAm7XEhKp_AK_eFb6HwlbRpJB7xCPYuUAqd91jualtogz6IKXAou8kKsN5EIC1WirrssNEV-PlcHJWk4CgGQJYXMXpJO7SLCohMcCTuQGiqvntbB4DlzupSqYTsJebSGagdApEaot3W1XpcW_fM--gDQrONgVakXyhu36xhzDHizeCIhhKPAvxCT9rG574K0I3wQVHaWswahjCKDWNZmZvKBidBOx0mGnSg3WJUQyXtUtWe4-dwANXeJ11dMGiNQBWZwhvpkfmcjh8UuAqtFxEYY-XssjAUj_JNjQCtiAyLJrvdHtTGBa7YGqeKnYnKsj9mJaLwuOgGgkSqSNwiNZkbOvqswJYIt54cN9qBfpFRgQZdL4FEAPWZTUgxhjEyrWFl87FaSyJqGUsZJe7myr8A5TrSoB9FIXHAKQeI-9qI7jXCfSGcinsQ9GHUasiezAhGQl_hccuNEBQQNWaHA5aYrxuyytfqxeCmLTGQ7v5SLIVSnVuAEbmN3tJoV8hQeUAYch3ByImU7KDwoGOd3meVfTldqNYNLe7S_equGaYIlfSkgNLXJtmEHeSB42Jom4MAqb_oK5vQMmqyPanoy9PKc7fbPC9zLm9Novip9nJIbQAZn4jlHgVgYQhoGrmBIpueRRzu5rCFmg2RfL7Vtm4Sq7qZJmxAl64IQjhFY3jcBjkCqM9oQQCuaiRgwJXAruuEKhyYYw4VMVDyDVdC70oZ3hVehtufAL7QmNnJR31tYbtTLoFEoG3CxUhphEEoMjrd0QmOexLqtMKQUXYtdy5CwqUA80UlJ0xMAUcFyptJNRxuV0mF-d2y3bfK8CSkT3-BrZES_gJxgQisqxtwEdMaXuXMT64iSa7pMyigYouZq8xaVPxeZnXx1yTuJdHhcxOs2_jPMirgCu1ivHpKfM9tAwnLLHUGkAZKa3rhflIhM3EPLPiuqSxXLsLUEDbqEAiFmbyHBGlJuC4csZZMMzYmVS7uQC3IDoSBBByUvIGZDbRqNKRkmawwFycOgXYscvxMMT9IbZJmw2NQ8Bqe-kuU3mPdE2_VNtqxz9PthR3Ftbfq_4AMEelR7C0Ic6VFBp7IMAFWBWlSNRFA5gKqPaKirRAkUl1ucxjOEJiQ5NCJx20rCgqFFU0SdxYsmSTAyofZxjpUaU2EoO6ytpUMvagoKY3pI1EQbq2U-DjyufFMRv9sgt2EJZUAoL-YgqsK_J0FNr7qZsqRvAjE2njwXzpazl1xrgSm4f0iF47in0vet5pQFOjz-WbRY7B5TXbZVf37TPKYDHna547zdD57QQ0Y, servername: sum1984.dpdns.org, client-fingerprint: chrome, network: ws, ws-opts: {path: 9561cf04-205c-4592-8247-a1c0571077bd-vw, headers: {Host: sum1984.dpdns.org}}}
+- {name: 美国 46, server: 198.41.192.27, port: 80, type: vless, uuid: 9561cf04-205c-4592-8247-a1c0571077bd, tls: false, flow: xtls-rprx-vision, encryption: mlkem768x25519plus.native.0rtt.m6rE8PJvVvg8HkZ3ivfEu4abEqC2-2o_iZVK8tq5tKQGWzl5VdeUvczFEgdV2gVJhjyZdFih6-OEfWPI7xVtTUMwiUtTTWZ5gjCeKeNbPTOPmQMVZboDVZJmo_C56gKAk_TE8hutezo_AIKLOhag-gqnuBygappAbfWuMBasmbWgBIYnxvasjBRNvcJdwCgyGUFsLPiD_KOQ7HAQE-zM66eWHHKJAKAad7q6k8U2klh_2oACHUNogVpN08EcbBZgW5Y4iqKj0TimIvNl0xLJAAm7XEhKp_AK_eFb6HwlbRpJB7xCPYuUAqd91jualtogz6IKXAou8kKsN5EIC1WirrssNEV-PlcHJWk4CgGQJYXMXpJO7SLCohMcCTuQGiqvntbB4DlzupSqYTsJebSGagdApEaot3W1XpcW_fM--gDQrONgVakXyhu36xhzDHizeCIhhKPAvxCT9rG574K0I3wQVHaWswahjCKDWNZmZvKBidBOx0mGnSg3WJUQyXtUtWe4-dwANXeJ11dMGiNQBWZwhvpkfmcjh8UuAqtFxEYY-XssjAUj_JNjQCtiAyLJrvdHtTGBa7YGqeKnYnKsj9mJaLwuOgGgkSqSNwiNZkbOvqswJYIt54cN9qBfpFRgQZdL4FEAPWZTUgxhjEyrWFl87FaSyJqGUsZJe7myr8A5TrSoB9FIXHAKQeI-9qI7jXCfSGcinsQ9GHUasiezAhGQl_hccuNEBQQNWaHA5aYrxuyytfqxeCmLTGQ7v5SLIVSnVuAEbmN3tJoV8hQeUAYch3ByImU7KDwoGOd3meVfTldqNYNLe7S_equGaYIlfSkgNLXJtmEHeSB42Jom4MAqb_oK5vQMmqyPanoy9PKc7fbPC9zLm9Novip9nJIbQAZn4jlHgVgYQhoGrmBIpueRRzu5rCFmg2RfL7Vtm4Sq7qZJmxAl64IQjhFY3jcBjkCqM9oQQCuaiRgwJXAruuEKhyYYw4VMVDyDVdC70oZ3hVehtufAL7QmNnJR31tYbtTLoFEoG3CxUhphEEoMjrd0QmOexLqtMKQUXYtdy5CwqUA80UlJ0xMAUcFyptJNRxuV0mF-d2y3bfK8CSkT3-BrZES_gJxgQisqxtwEdMaXuXMT64iSa7pMyigYouZq8xaVPxeZnXx1yTuJdHhcxOs2_jPMirgCu1ivHpKfM9tAwnLLHUGkAZKa3rhflIhM3EPLPiuqSxXLsLUEDbqEAiFmbyHBGlJuC4csZZMMzYmVS7uQC3IDoSBBByUvIGZDbRqNKRkmawwFycOgXYscvxMMT9IbZJmw2NQ8Bqe-kuU3mPdE2_VNtqxz9PthR3Ftbfq_4AMEelR7C0Ic6VFBp7IMAFWBWlSNRFA5gKqPaKirRAkUl1ucxjOEJiQ5NCJx20rCgqFFU0SdxYsmSTAyofZxjpUaU2EoO6ytpUMvagoKY3pI1EQbq2U-DjyufFMRv9sgt2EJZUAoL-YgqsK_J0FNr7qZsqRvAjE2njwXzpazl1xrgSm4f0iF47in0vet5pQFOjz-WbRY7B5TXbZVf37TPKYDHna547zdD57QQ0Y, client-fingerprint: chrome, network: ws, ws-opts: {path: 9561cf04-205c-4592-8247-a1c0571077bd-vw, headers: {Host: sum1984.dpdns.org}}}
+- {name: 美国 47, server: 104.194.74.14, port: 443, type: vless, uuid: 2f56719f-d1dd-442d-a13c-ddbea23f1ab1, tls: true, flow: xtls-rprx-vision, reality-opts: {public-key: GmSrU6Wv8pYT96TE080sn1EzQnZ3j0Ea7usrxET7ol8, short-id: 8d008277}, servername: www.apple.com, client-fingerprint: chrome, network: tcp, udp: true}
+- {name: 美国 48, server: www.pvccabinets.com, port: 56203, type: vless, uuid: d9f22672-2dda-423b-8228-552a1e137a65, tls: true, servername: www.pvccabinets.com, client-fingerprint: chrome, network: ws, ws-opts: {path: /ws, headers: {Host: www.pvccabinets.com}}, udp: true}
+- {name: 美国 49, server: 64.83.31.25, port: 443, type: vless, uuid: 6c8e8c20-b27b-4b54-b2b9-b1f11a91f81a, tls: true, flow: xtls-rprx-vision, reality-opts: {public-key: wg_aSbYWQ2wxEUYFo84asDE8iZOy1gLNg63ybkZ-wGk, short-id: 2c4c8ba1bb21ce7a}, servername: www.cloudflare.com, client-fingerprint: chrome, network: tcp, udp: true}
+- {name: 美国 50, server: node.erek.space, port: 9443, type: vless, uuid: 840a617f-8112-4fef-a259-8cc29edb633c, tls: true, flow: xtls-rprx-vision, reality-opts: {public-key: 9xa5Ajcz0cWxLSIN4fimIsKIo0f8uys2xpo2OLAwRB4, short-id: 60b74c6e6a4f0bf5}, servername: www.ibm.com, client-fingerprint: chrome, network: tcp}
+- {name: 美国 51, server: 67.216.202.155, port: 443, type: vless, uuid: bfc203ab-e5b9-42e0-98ef-ca94fb71eb81, tls: true, flow: xtls-rprx-vision, reality-opts: {public-key: 5Uzpm2y3OVllLTq2YzJFnpP3ho1UwsS8FeFbCC460ww, short-id: 5d8eb8b0e709e817}, servername: www.debian.org, client-fingerprint: firefox, network: tcp, udp: true}
+- {name: 美国 52, server: 199.115.230.7, port: 444, type: vmess, uuid: b0d82c36-4e2f-4f3a-9a15-8c5d6e7f1a2b, alterId: 0, cipher: auto, tls: false, network: ws, ws-opts: {path: /ray}, udp: true}
+- {name: 美国 53, server: 176.122.172.186, port: 10086, type: vmess, uuid: 3171efcf-1bdd-423a-956e-dadf43113692, alterId: 0, cipher: auto, tls: false}
+- {name: 德国 01, server: 185.254.74.247, port: 8443, type: ss, cipher: aes-256-gcm, password: QigeSS2026!Secure#Proxy}
 proxy-groups:
 - name: 🚀 节点选择
   type: select
   proxies:
   - ♻️ 自动选择
-  - 🇭🇰 香港 01
-  - 🇭🇰 香港 02
-  - 🇭🇰 香港 03
-  - 🇭🇰 香港 04
-  - 🇭🇰 香港 05
-  - 🇭🇰 香港 06
-  - 🇭🇰 香港 07
-  - 🇭🇰 香港 08
-  - 🇭🇰 香港 09
-  - 🇭🇰 香港 10
-  - 🇯🇵 日本 01
-  - 🇯🇵 日本 02
-  - 🇯🇵 日本 03
-  - 🇯🇵 日本 04
-  - 🇯🇵 日本 05
-  - 🇯🇵 日本 06
-  - 🇯🇵 日本 07
-  - 🇯🇵 日本 08
-  - 🇯🇵 日本 09
-  - 🇯🇵 日本 10
-  - 🇯🇵 日本 11
-  - 🇯🇵 日本 12
-  - 🇯🇵 日本 13
-  - 🇯🇵 日本 14
-  - 🇯🇵 日本 15
-  - 🇯🇵 日本 16
-  - 🇯🇵 日本 17
-  - 🇯🇵 日本 18
-  - 🇸🇬 新加坡 01
-  - 🇸🇬 新加坡 02
-  - 🇺🇸 美国 01
-  - 🇺🇸 美国 02
-  - 🇺🇸 美国 03
-  - 🇺🇸 美国 04
-  - 🇺🇸 美国 05
-  - 🇺🇸 美国 06
-  - 🇺🇸 美国 07
-  - 🇺🇸 美国 08
-  - 🇺🇸 美国 09
-  - 🇺🇸 美国 10
-  - 🇺🇸 美国 11
-  - 🇺🇸 美国 12
-  - 🇺🇸 美国 13
-  - 🇺🇸 美国 14
-  - 🇺🇸 美国 15
-  - 🇺🇸 美国 16
-  - 🇺🇸 美国 17
-  - 🇺🇸 美国 18
-  - 🇺🇸 美国 19
-  - 🇺🇸 美国 20
-  - 🇺🇸 美国 21
-  - 🇺🇸 美国 22
-  - 🇺🇸 美国 23
-  - 🇺🇸 美国 24
-  - 🇺🇸 美国 25
-  - 🇺🇸 美国 26
-  - 🇺🇸 美国 27
-  - 🇺🇸 美国 28
-  - 🇺🇸 美国 29
-  - 🇺🇸 美国 30
-  - 🇺🇸 美国 31
-  - 🇺🇸 美国 32
-  - 🇺🇸 美国 33
-  - 🇺🇸 美国 34
-  - 🇺🇸 美国 35
-  - 🇺🇸 美国 36
-  - 🇺🇸 美国 37
-  - 🇺🇸 美国 38
-  - 🇺🇸 美国 39
-  - 🇺🇸 美国 40
-  - 🇺🇸 美国 41
-  - 🇺🇸 美国 42
-  - 🇺🇸 美国 43
-  - 🇺🇸 美国 44
-  - 🇺🇸 美国 45
-  - 🇺🇸 美国 46
-  - 🇺🇸 美国 47
-  - 🇺🇸 美国 48
-  - 🇺🇸 美国 49
-  - 🇺🇸 美国 50
-  - 🇺🇸 美国 51
-  - 🇺🇸 美国 52
-  - 🇺🇸 美国 53
-  - 🇩🇪 德国 01
+  - 香港 01
+  - 香港 02
+  - 香港 03
+  - 香港 04
+  - 香港 05
+  - 香港 06
+  - 香港 07
+  - 香港 08
+  - 香港 09
+  - 香港 10
+  - 日本 01
+  - 日本 02
+  - 日本 03
+  - 日本 04
+  - 日本 05
+  - 日本 06
+  - 日本 07
+  - 日本 08
+  - 日本 09
+  - 日本 10
+  - 日本 11
+  - 日本 12
+  - 日本 13
+  - 日本 14
+  - 日本 15
+  - 日本 16
+  - 日本 17
+  - 日本 18
+  - 新加坡 01
+  - 新加坡 02
+  - 美国 01
+  - 美国 02
+  - 美国 03
+  - 美国 04
+  - 美国 05
+  - 美国 06
+  - 美国 07
+  - 美国 08
+  - 美国 09
+  - 美国 10
+  - 美国 11
+  - 美国 12
+  - 美国 13
+  - 美国 14
+  - 美国 15
+  - 美国 16
+  - 美国 17
+  - 美国 18
+  - 美国 19
+  - 美国 20
+  - 美国 21
+  - 美国 22
+  - 美国 23
+  - 美国 24
+  - 美国 25
+  - 美国 26
+  - 美国 27
+  - 美国 28
+  - 美国 29
+  - 美国 30
+  - 美国 31
+  - 美国 32
+  - 美国 33
+  - 美国 34
+  - 美国 35
+  - 美国 36
+  - 美国 37
+  - 美国 38
+  - 美国 39
+  - 美国 40
+  - 美国 41
+  - 美国 42
+  - 美国 43
+  - 美国 44
+  - 美国 45
+  - 美国 46
+  - 美国 47
+  - 美国 48
+  - 美国 49
+  - 美国 50
+  - 美国 51
+  - 美国 52
+  - 美国 53
+  - 德国 01
 - name: ♻️ 自动选择
   type: url-test
   proxies:
-  - 🇭🇰 香港 01
-  - 🇭🇰 香港 02
-  - 🇭🇰 香港 03
-  - 🇭🇰 香港 04
-  - 🇭🇰 香港 05
-  - 🇭🇰 香港 06
-  - 🇭🇰 香港 07
-  - 🇭🇰 香港 08
-  - 🇭🇰 香港 09
-  - 🇭🇰 香港 10
-  - 🇯🇵 日本 01
-  - 🇯🇵 日本 02
-  - 🇯🇵 日本 03
-  - 🇯🇵 日本 04
-  - 🇯🇵 日本 05
-  - 🇯🇵 日本 06
-  - 🇯🇵 日本 07
-  - 🇯🇵 日本 08
-  - 🇯🇵 日本 09
-  - 🇯🇵 日本 10
-  - 🇯🇵 日本 11
-  - 🇯🇵 日本 12
-  - 🇯🇵 日本 13
-  - 🇯🇵 日本 14
-  - 🇯🇵 日本 15
-  - 🇯🇵 日本 16
-  - 🇯🇵 日本 17
-  - 🇯🇵 日本 18
-  - 🇸🇬 新加坡 01
-  - 🇸🇬 新加坡 02
-  - 🇺🇸 美国 01
-  - 🇺🇸 美国 02
-  - 🇺🇸 美国 03
-  - 🇺🇸 美国 04
-  - 🇺🇸 美国 05
-  - 🇺🇸 美国 06
-  - 🇺🇸 美国 07
-  - 🇺🇸 美国 08
-  - 🇺🇸 美国 09
-  - 🇺🇸 美国 10
-  - 🇺🇸 美国 11
-  - 🇺🇸 美国 12
-  - 🇺🇸 美国 13
-  - 🇺🇸 美国 14
-  - 🇺🇸 美国 15
-  - 🇺🇸 美国 16
-  - 🇺🇸 美国 17
-  - 🇺🇸 美国 18
-  - 🇺🇸 美国 19
-  - 🇺🇸 美国 20
-  - 🇺🇸 美国 21
-  - 🇺🇸 美国 22
-  - 🇺🇸 美国 23
-  - 🇺🇸 美国 24
-  - 🇺🇸 美国 25
-  - 🇺🇸 美国 26
-  - 🇺🇸 美国 27
-  - 🇺🇸 美国 28
-  - 🇺🇸 美国 29
-  - 🇺🇸 美国 30
-  - 🇺🇸 美国 31
-  - 🇺🇸 美国 32
-  - 🇺🇸 美国 33
-  - 🇺🇸 美国 34
-  - 🇺🇸 美国 35
-  - 🇺🇸 美国 36
-  - 🇺🇸 美国 37
-  - 🇺🇸 美国 38
-  - 🇺🇸 美国 39
-  - 🇺🇸 美国 40
-  - 🇺🇸 美国 41
-  - 🇺🇸 美国 42
-  - 🇺🇸 美国 43
-  - 🇺🇸 美国 44
-  - 🇺🇸 美国 45
-  - 🇺🇸 美国 46
-  - 🇺🇸 美国 47
-  - 🇺🇸 美国 48
-  - 🇺🇸 美国 49
-  - 🇺🇸 美国 50
-  - 🇺🇸 美国 51
-  - 🇺🇸 美国 52
-  - 🇺🇸 美国 53
-  - 🇩🇪 德国 01
+  - 香港 01
+  - 香港 02
+  - 香港 03
+  - 香港 04
+  - 香港 05
+  - 香港 06
+  - 香港 07
+  - 香港 08
+  - 香港 09
+  - 香港 10
+  - 日本 01
+  - 日本 02
+  - 日本 03
+  - 日本 04
+  - 日本 05
+  - 日本 06
+  - 日本 07
+  - 日本 08
+  - 日本 09
+  - 日本 10
+  - 日本 11
+  - 日本 12
+  - 日本 13
+  - 日本 14
+  - 日本 15
+  - 日本 16
+  - 日本 17
+  - 日本 18
+  - 新加坡 01
+  - 新加坡 02
+  - 美国 01
+  - 美国 02
+  - 美国 03
+  - 美国 04
+  - 美国 05
+  - 美国 06
+  - 美国 07
+  - 美国 08
+  - 美国 09
+  - 美国 10
+  - 美国 11
+  - 美国 12
+  - 美国 13
+  - 美国 14
+  - 美国 15
+  - 美国 16
+  - 美国 17
+  - 美国 18
+  - 美国 19
+  - 美国 20
+  - 美国 21
+  - 美国 22
+  - 美国 23
+  - 美国 24
+  - 美国 25
+  - 美国 26
+  - 美国 27
+  - 美国 28
+  - 美国 29
+  - 美国 30
+  - 美国 31
+  - 美国 32
+  - 美国 33
+  - 美国 34
+  - 美国 35
+  - 美国 36
+  - 美国 37
+  - 美国 38
+  - 美国 39
+  - 美国 40
+  - 美国 41
+  - 美国 42
+  - 美国 43
+  - 美国 44
+  - 美国 45
+  - 美国 46
+  - 美国 47
+  - 美国 48
+  - 美国 49
+  - 美国 50
+  - 美国 51
+  - 美国 52
+  - 美国 53
+  - 德国 01
   url: http://www.gstatic.com/generate_204
   interval: 300
 - name: 🐟 漏网之鱼

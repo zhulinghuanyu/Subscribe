@@ -16,9 +16,9 @@ https://raw.githubusercontent.com/zhulinghuanyu/BestSub/main/links.txt
 ---
 更新时间:
 ```text
-2026-09-28 09:55:26 (UTC+8)
+2026-09-28 16:27:04 (UTC+8)
 ```
 当前状态:
 ```text
-https://yfamilys.com/subscribe/BjvQL5possAfRURERSba6-TXb12JPubo
+https://yfamilys.com/subscribe/P2kcY9eCX5B0PziaDXqfR94-TPZWVPl4
 ```

@@ -1,160 +1,114 @@
 port: 7890
 socks-port: 7891
 allow-lan: true
-bind-address: '*'
-ipv6: false
 mode: Rule
 log-level: info
 external-controller: 127.0.0.1:9090
-dns:
-  enable: true
-  ipv6: false
-  listen: 0.0.0.0:53
-  fake-ip-range: 198.18.0.1/16
-  use-hosts: true
-  fake-ip-filter:
-  - '*.lan'
-  - '*.local'
-  - '*.arpa'
-  - time.*.com
-  - ntp.*.com
-  - +.market.xiaomi.com
-  - localhost.ptlogin2.qq.com
-  - '*.msftncsi.com'
-  - www.msftconnecttest.com
-  default-nameserver:
-  - 119.29.29.29
-  - 223.5.5.5
-  nameserver:
-  - 119.29.29.29
-  - 223.5.5.5
-  nameserver-policy:
-    geosite:cn:
-    - 119.29.29.29
-    - 223.5.5.5
-    geosite:geolocation-!cn:
-    - tls://1.0.0.1:853
-    - tls://dns.google:853
-  proxy-server-nameserver:
-  - 119.29.29.29
-  - 223.5.5.5
-  fallback:
-  - 8.8.8.8
-  - 1.1.1.1
-  - tls://1.0.0.1:853
-  - tls://dns.google:853
-  fallback-filter:
-    geoip: true
-    geoip-code: CN
-    geosite:
-    - gfw
-    ipcidr:
-    - 240.0.0.0/4
 proxies:
-- {name: 🇭🇰 香港 01, server: 156.239.13.161, port: 51443, type: vless, uuid: 3e4c67dd-eeaa-48ad-8066-0dca798cccb3, tls: true, flow: xtls-rprx-vision, reality-opts: {public-key: WpfLIDfNGu5tmsHEa_mrZAgTDwPYD_9TK2zagNx3kgk, short-id: aa5b653590725505}, servername: www.cloudflare.com, client-fingerprint: chrome, network: tcp, udp: true}
-- {name: 🇭🇰 香港 02, server: 165.154.193.165, port: 443, type: hysteria2, password: qtMKhrFAMrVZUfupkc5CFHmRKYtNPSjt, auth: qtMKhrFAMrVZUfupkc5CFHmRKYtNPSjt, sni: 165.154.193.165, skip-cert-verify: true, obfs: salamander, obfs-password: d7897b996af77eeecb7ac010361d74fb, udp: true}
-- {name: 🇹🇼 台湾 01, server: vpn.leef.work, port: 443, type: vless, uuid: ad13f5d1-4c70-4f28-93d5-c4cca5e1d560, tls: true, flow: xtls-rprx-vision, reality-opts: {public-key: myar6jZrOR7AlU13O6adZ_3u39qjSVME4_1dPs0dmB8, short-id: 91823bd3b7188d3c}, servername: www.cloudflare.com, client-fingerprint: chrome, network: tcp, udp: true}
-- {name: 🇯🇵 日本 01, server: 45.12.89.202, port: 443, type: ss, cipher: chacha20-ietf-poly1305, password: 1f24d145bf7c877f7e3140b7918eb9cd804b1576a96596f9, udp: true}
-- {name: 🇯🇵 日本 02, server: 191.223.221.53, port: 8388, type: ss, cipher: aes-256-gcm, password: JuD6MNgtX3nVpCzFzXYVYjDTZ7nsmaTv, udp: true}
-- {name: 🇯🇵 日本 03, server: 160.21.74.183, port: 8443, type: trojan, password: ZLNrfFIw6IXWvhFvGEWi4EcsWJ76ZiDh, sni: 160.21.74.183, skip-cert-verify: true, udp: true}
-- {name: 🇯🇵 日本 04, server: 154.36.158.197, port: 8388, type: ss, cipher: aes-256-gcm, password: BeaUf9c0AEWH40Pu}
-- {name: 🇯🇵 日本 05, server: odysseyhermes.com, port: 443, type: vmess, uuid: 36e0cc31-5ce5-49d3-89eb-63d5c954fda5, alterId: 0, cipher: auto, tls: true, skip-cert-verify: false, network: ws, ws-opts: {path: /ws, headers: {Host: odysseyhermes.com}}}
-- {name: 🇯🇵 日本 06, server: 147.78.245.85, port: 443, type: vless, uuid: 7c172892-d233-4f58-8345-3a6f8dc83834, tls: true, flow: xtls-rprx-vision, reality-opts: {public-key: YNuLTkque_lJzdyWxfkrledbuEXg6zy_1-Jx8HmT9GA, short-id: 66ff02c8f5ff0b52}, servername: www.microsoft.com, client-fingerprint: chrome, network: tcp}
-- {name: 🇰🇷 韩国 01, server: 151.245.106.64, port: 48443, type: vless, uuid: ac09209d-4601-41cb-a516-77f215169c70, tls: true, reality-opts: {public-key: zC7C98cq-x6BZz6-n3spxHfXsAz0En4tPxvucql4WgU, short-id: ea9d3114ed5c113b}, servername: www.cloudflare.com, client-fingerprint: chrome, network: tcp, udp: true}
-- {name: 🇺🇸 美国 01, server: zuoan.tranyoo888.com, port: 443, type: vless, uuid: 435feec2-0421-44b9-a8b0-60da252556c0, tls: true, flow: xtls-rprx-vision, reality-opts: {public-key: _XNcU39HOvqF8GXyfA8OAG-dp6ZMl9L10r6K646npHc, short-id: ce3dccc84e5bac0c}, servername: www.mozilla.org, client-fingerprint: chrome, network: tcp, udp: true}
-- {name: 🇺🇸 美国 02, server: vpn.leef.work, port: 443, type: vless, uuid: 00b808cc-9027-446f-953a-06c2933caa29, tls: true, reality-opts: {public-key: myar6jZrOR7AlU13O6adZ_3u39qjSVME4_1dPs0dmB8, short-id: 91823bd3b7188d3c}, servername: www.cloudflare.com, client-fingerprint: chrome, network: tcp, udp: true}
-- {name: 🇺🇸 美国 03, server: vpn.leef.work, port: 443, type: vless, uuid: dee4674c-2f34-4f4d-8ee4-70589c6a36aa, tls: true, flow: xtls-rprx-vision, reality-opts: {public-key: myar6jZrOR7AlU13O6adZ_3u39qjSVME4_1dPs0dmB8, short-id: 91823bd3b7188d3c}, servername: www.cloudflare.com, client-fingerprint: chrome, network: tcp}
-- {name: 🇺🇸 美国 04, server: 69.42.222.160, port: 50443, type: vless, uuid: 20cdcc5b-d7d7-429e-afe3-e6aaf3664993, tls: true, flow: xtls-rprx-vision, reality-opts: {public-key: HI0EyjPOcXSfjScfy3y_Vlan9vsWqjejh2_NjqTyLQo, short-id: d27ffd0579fd79bb}, servername: www.cloudflare.com, client-fingerprint: chrome, network: tcp, udp: true}
-- {name: 🇺🇸 美国 05, server: vpn.leef.work, port: 443, type: vless, uuid: d1f39158-8a1a-4c10-b067-6e527d759580, tls: true, flow: xtls-rprx-vision, reality-opts: {public-key: myar6jZrOR7AlU13O6adZ_3u39qjSVME4_1dPs0dmB8, short-id: 91823bd3b7188d3c}, servername: www.cloudflare.com, client-fingerprint: chrome, network: tcp}
-- {name: 🇺🇸 美国 06, server: 154.44.0.66, port: 8443, type: hysteria2, password: MAJwoDUk2HGN1b0us1OHDootA0P1S2sr, auth: MAJwoDUk2HGN1b0us1OHDootA0P1S2sr, sni: www.bing.com, skip-cert-verify: true, alpn: [h3], obfs: salamander, obfs-password: 5B2aqKwLl2n1QmNpr-YNgoaCJf3ZNMlo}
-- {name: 🇺🇸 美国 07, server: 176.122.136.75, port: 10888, type: ss, cipher: aes-256-gcm, password: YEp1pjf41i6o948CjU7LHFHb, udp: true}
-- {name: 🇺🇸 美国 08, server: 179.255.140.244, port: 443, type: vless, uuid: 9f494aef-712d-4b4c-8130-f4e0902def28, tls: true, flow: xtls-rprx-vision, reality-opts: {public-key: DsPuscZooSV32qg3HfGnrGKXI36Iq3fl0BGqUEUsayM, short-id: '70738781'}, servername: www.bing.com, client-fingerprint: chrome, network: tcp}
-- {name: 🇺🇸 美国 09, server: 154.29.159.211, port: 26763, type: vless, uuid: d3f0d021-6a98-43c1-ba26-b75bd0d145f0, tls: true, flow: xtls-rprx-vision, reality-opts: {public-key: 9tgCHwsQFN0j6FaMsAeJN8TSD2qQFnX6JdTaEdp8TRU, short-id: b72b5eed}, servername: apple.com, client-fingerprint: chrome, network: tcp, udp: true}
-- {name: 🇺🇸 美国 10, server: 199.115.230.7, port: 443, type: vless, uuid: af0e356f-bcb3-4a16-9ab6-c32d69586d3a, tls: true, flow: xtls-rprx-vision, reality-opts: {public-key: 1rddTBX8WGdevfqfL6qO7A0Enzs_9St6EJjrroYGYyE, short-id: 0b60fc1d4c0d3a08}, servername: www.cloudflare.com, client-fingerprint: chrome, network: tcp, udp: true}
-- {name: 🇺🇸 美国 11, server: 104.244.94.21, port: 20543, type: vless, uuid: 4222e71c-9934-4d31-902d-ce178e8b9a54, tls: true, flow: xtls-rprx-vision, reality-opts: {public-key: 0ZRIRi3Wr7XpWfOPc06yi7TIzl-ccP5fyS6RC2mDakI, short-id: 2ba1d452414f40ba}, servername: www.cloudflare.com, client-fingerprint: chrome, network: tcp, udp: true}
-- {name: 🇺🇸 美国 12, server: 176.122.180.39, port: 8443, type: vless, uuid: 38a9c88a-14c7-49e4-841d-bdb78fbb9529, tls: true, reality-opts: {public-key: 8-tz1FBA5y6CcLp0NogIY4-x6pxkFBZ_HWSOXEioWho, short-id: dc286495}, servername: www.cloudflare.com, client-fingerprint: chrome, network: tcp, udp: true}
-- {name: 🇺🇸 美国 13, server: 107.182.191.5, port: 8443, type: trojan, password: 657e9f52b1f8a209df7d123404bdb444, sni: 107.182.191.5, skip-cert-verify: true, udp: true}
-- {name: 🇺🇸 美国 14, server: 154.12.47.231, port: 8443, type: vless, uuid: e146651d-c782-4823-bd7a-9eb4841f64a8, tls: true, flow: xtls-rprx-vision, reality-opts: {public-key: eb5O54Y8XyINkCJCG64GWRZYYRHqQS4mgXRI2ttGdG4, short-id: 792fad366e4a06c3}, servername: www.apple.com, client-fingerprint: chrome, network: tcp, udp: true}
-- {name: 🇺🇸 美国 15, server: 104.36.67.121, port: 34366, type: vless, uuid: d7a43feb-ff01-4c5f-bee6-16a554998095, tls: true, flow: xtls-rprx-vision, reality-opts: {public-key: 28nrqAh4V3SN-T1GrtczibvWwACCpdmetfgGJc9MXmQ, short-id: 401a5e2d00}, servername: www.intel.com, client-fingerprint: chrome, network: tcp}
-- {name: 🇺🇸 美国 16, server: 67.209.183.182, port: 4433, type: hysteria2, password: 1E6GIU0WAFo9wAnsG52ruA==, auth: 1E6GIU0WAFo9wAnsG52ruA==, sni: bing.com, skip-cert-verify: true}
-- {name: 🇺🇸 美国 17, server: 38.150.35.208, port: 8443, type: trojan, password: 1f8dc24373d4add7767beac448e32397, sni: www.apple.com, skip-cert-verify: true, udp: true}
-- {name: 🇺🇸 美国 18, server: 176.122.176.214, port: 15555, type: vless, uuid: 0fcced9f-7436-48e1-b268-f837be824506, tls: false, client-fingerprint: chrome, network: ws, ws-opts: {path: /ws}, udp: true}
-- {name: 🇺🇸 美国 19, server: 172.96.192.239, port: 443, type: vless, uuid: f4213964-a506-4c1a-8f74-4c73ce333212, tls: true, flow: xtls-rprx-vision, reality-opts: {public-key: OwmPqDIqYlaY_ULICISn-RtyUoFzkTE1ipZAKTLKiBs, short-id: ffda4d8141e2bdf7}, servername: www.microsoft.com, client-fingerprint: chrome, network: tcp, udp: true}
-- {name: 🇺🇸 美国 20, server: 96.45.186.114, port: 8443, type: ss, cipher: chacha20-ietf-poly1305, password: SScN2QK7mR9pV4xH}
-- {name: 🇩🇪 德国 01, server: vpn.leef.work, port: 443, type: vless, uuid: e3036f56-ebbb-4f29-a5a2-422ecd894def, tls: true, flow: xtls-rprx-vision, reality-opts: {public-key: myar6jZrOR7AlU13O6adZ_3u39qjSVME4_1dPs0dmB8, short-id: 91823bd3b7188d3c}, servername: www.cloudflare.com, client-fingerprint: chrome, network: tcp, udp: true}
-- {name: 🇩🇪 德国 02, server: de.zhou-yufan.com, port: 443, type: vmess, uuid: f38e591d-d13a-4c30-9763-6be3ad65f3ec, alterId: 0, cipher: auto, tls: true, skip-cert-verify: false, servername: de.zhou-yufan.com, udp: true}
+- {name: 香港 01, server: 156.239.13.161, port: 51443, type: vless, uuid: 3e4c67dd-eeaa-48ad-8066-0dca798cccb3, tls: true, flow: xtls-rprx-vision, reality-opts: {public-key: WpfLIDfNGu5tmsHEa_mrZAgTDwPYD_9TK2zagNx3kgk, short-id: aa5b653590725505}, servername: www.cloudflare.com, client-fingerprint: chrome, network: tcp, udp: true}
+- {name: 香港 02, server: 165.154.193.165, port: 443, type: hysteria2, password: qtMKhrFAMrVZUfupkc5CFHmRKYtNPSjt, auth: qtMKhrFAMrVZUfupkc5CFHmRKYtNPSjt, sni: 165.154.193.165, skip-cert-verify: true, obfs: salamander, obfs-password: d7897b996af77eeecb7ac010361d74fb, udp: true}
+- {name: 台湾 01, server: vpn.leef.work, port: 443, type: vless, uuid: ad13f5d1-4c70-4f28-93d5-c4cca5e1d560, tls: true, flow: xtls-rprx-vision, reality-opts: {public-key: myar6jZrOR7AlU13O6adZ_3u39qjSVME4_1dPs0dmB8, short-id: 91823bd3b7188d3c}, servername: www.cloudflare.com, client-fingerprint: chrome, network: tcp, udp: true}
+- {name: 日本 01, server: 45.12.89.202, port: 443, type: ss, cipher: chacha20-ietf-poly1305, password: 1f24d145bf7c877f7e3140b7918eb9cd804b1576a96596f9, udp: true}
+- {name: 日本 02, server: 191.223.221.53, port: 8388, type: ss, cipher: aes-256-gcm, password: JuD6MNgtX3nVpCzFzXYVYjDTZ7nsmaTv, udp: true}
+- {name: 日本 03, server: 160.21.74.183, port: 8443, type: trojan, password: ZLNrfFIw6IXWvhFvGEWi4EcsWJ76ZiDh, sni: 160.21.74.183, skip-cert-verify: true, udp: true}
+- {name: 日本 04, server: 154.36.158.197, port: 8388, type: ss, cipher: aes-256-gcm, password: BeaUf9c0AEWH40Pu}
+- {name: 日本 05, server: odysseyhermes.com, port: 443, type: vmess, uuid: 36e0cc31-5ce5-49d3-89eb-63d5c954fda5, alterId: 0, cipher: auto, tls: true, skip-cert-verify: false, network: ws, ws-opts: {path: /ws, headers: {Host: odysseyhermes.com}}}
+- {name: 日本 06, server: 147.78.245.85, port: 443, type: vless, uuid: 7c172892-d233-4f58-8345-3a6f8dc83834, tls: true, flow: xtls-rprx-vision, reality-opts: {public-key: YNuLTkque_lJzdyWxfkrledbuEXg6zy_1-Jx8HmT9GA, short-id: 66ff02c8f5ff0b52}, servername: www.microsoft.com, client-fingerprint: chrome, network: tcp}
+- {name: 韩国 01, server: 151.245.106.64, port: 48443, type: vless, uuid: ac09209d-4601-41cb-a516-77f215169c70, tls: true, reality-opts: {public-key: zC7C98cq-x6BZz6-n3spxHfXsAz0En4tPxvucql4WgU, short-id: ea9d3114ed5c113b}, servername: www.cloudflare.com, client-fingerprint: chrome, network: tcp, udp: true}
+- {name: 美国 01, server: zuoan.tranyoo888.com, port: 443, type: vless, uuid: 435feec2-0421-44b9-a8b0-60da252556c0, tls: true, flow: xtls-rprx-vision, reality-opts: {public-key: _XNcU39HOvqF8GXyfA8OAG-dp6ZMl9L10r6K646npHc, short-id: ce3dccc84e5bac0c}, servername: www.mozilla.org, client-fingerprint: chrome, network: tcp, udp: true}
+- {name: 美国 02, server: vpn.leef.work, port: 443, type: vless, uuid: 00b808cc-9027-446f-953a-06c2933caa29, tls: true, reality-opts: {public-key: myar6jZrOR7AlU13O6adZ_3u39qjSVME4_1dPs0dmB8, short-id: 91823bd3b7188d3c}, servername: www.cloudflare.com, client-fingerprint: chrome, network: tcp, udp: true}
+- {name: 美国 03, server: vpn.leef.work, port: 443, type: vless, uuid: dee4674c-2f34-4f4d-8ee4-70589c6a36aa, tls: true, flow: xtls-rprx-vision, reality-opts: {public-key: myar6jZrOR7AlU13O6adZ_3u39qjSVME4_1dPs0dmB8, short-id: 91823bd3b7188d3c}, servername: www.cloudflare.com, client-fingerprint: chrome, network: tcp}
+- {name: 美国 04, server: 69.42.222.160, port: 50443, type: vless, uuid: 20cdcc5b-d7d7-429e-afe3-e6aaf3664993, tls: true, flow: xtls-rprx-vision, reality-opts: {public-key: HI0EyjPOcXSfjScfy3y_Vlan9vsWqjejh2_NjqTyLQo, short-id: d27ffd0579fd79bb}, servername: www.cloudflare.com, client-fingerprint: chrome, network: tcp, udp: true}
+- {name: 美国 05, server: vpn.leef.work, port: 443, type: vless, uuid: d1f39158-8a1a-4c10-b067-6e527d759580, tls: true, flow: xtls-rprx-vision, reality-opts: {public-key: myar6jZrOR7AlU13O6adZ_3u39qjSVME4_1dPs0dmB8, short-id: 91823bd3b7188d3c}, servername: www.cloudflare.com, client-fingerprint: chrome, network: tcp}
+- {name: 美国 06, server: 154.44.0.66, port: 8443, type: hysteria2, password: MAJwoDUk2HGN1b0us1OHDootA0P1S2sr, auth: MAJwoDUk2HGN1b0us1OHDootA0P1S2sr, sni: www.bing.com, skip-cert-verify: true, alpn: [h3], obfs: salamander, obfs-password: 5B2aqKwLl2n1QmNpr-YNgoaCJf3ZNMlo}
+- {name: 美国 07, server: 176.122.136.75, port: 10888, type: ss, cipher: aes-256-gcm, password: YEp1pjf41i6o948CjU7LHFHb, udp: true}
+- {name: 美国 08, server: 179.255.140.244, port: 443, type: vless, uuid: 9f494aef-712d-4b4c-8130-f4e0902def28, tls: true, flow: xtls-rprx-vision, reality-opts: {public-key: DsPuscZooSV32qg3HfGnrGKXI36Iq3fl0BGqUEUsayM, short-id: '70738781'}, servername: www.bing.com, client-fingerprint: chrome, network: tcp}
+- {name: 美国 09, server: 154.29.159.211, port: 26763, type: vless, uuid: d3f0d021-6a98-43c1-ba26-b75bd0d145f0, tls: true, flow: xtls-rprx-vision, reality-opts: {public-key: 9tgCHwsQFN0j6FaMsAeJN8TSD2qQFnX6JdTaEdp8TRU, short-id: b72b5eed}, servername: apple.com, client-fingerprint: chrome, network: tcp, udp: true}
+- {name: 美国 10, server: 199.115.230.7, port: 443, type: vless, uuid: af0e356f-bcb3-4a16-9ab6-c32d69586d3a, tls: true, flow: xtls-rprx-vision, reality-opts: {public-key: 1rddTBX8WGdevfqfL6qO7A0Enzs_9St6EJjrroYGYyE, short-id: 0b60fc1d4c0d3a08}, servername: www.cloudflare.com, client-fingerprint: chrome, network: tcp, udp: true}
+- {name: 美国 11, server: 104.244.94.21, port: 20543, type: vless, uuid: 4222e71c-9934-4d31-902d-ce178e8b9a54, tls: true, flow: xtls-rprx-vision, reality-opts: {public-key: 0ZRIRi3Wr7XpWfOPc06yi7TIzl-ccP5fyS6RC2mDakI, short-id: 2ba1d452414f40ba}, servername: www.cloudflare.com, client-fingerprint: chrome, network: tcp, udp: true}
+- {name: 美国 12, server: 176.122.180.39, port: 8443, type: vless, uuid: 38a9c88a-14c7-49e4-841d-bdb78fbb9529, tls: true, reality-opts: {public-key: 8-tz1FBA5y6CcLp0NogIY4-x6pxkFBZ_HWSOXEioWho, short-id: dc286495}, servername: www.cloudflare.com, client-fingerprint: chrome, network: tcp, udp: true}
+- {name: 美国 13, server: 107.182.191.5, port: 8443, type: trojan, password: 657e9f52b1f8a209df7d123404bdb444, sni: 107.182.191.5, skip-cert-verify: true, udp: true}
+- {name: 美国 14, server: 154.12.47.231, port: 8443, type: vless, uuid: e146651d-c782-4823-bd7a-9eb4841f64a8, tls: true, flow: xtls-rprx-vision, reality-opts: {public-key: eb5O54Y8XyINkCJCG64GWRZYYRHqQS4mgXRI2ttGdG4, short-id: 792fad366e4a06c3}, servername: www.apple.com, client-fingerprint: chrome, network: tcp, udp: true}
+- {name: 美国 15, server: 104.36.67.121, port: 34366, type: vless, uuid: d7a43feb-ff01-4c5f-bee6-16a554998095, tls: true, flow: xtls-rprx-vision, reality-opts: {public-key: 28nrqAh4V3SN-T1GrtczibvWwACCpdmetfgGJc9MXmQ, short-id: 401a5e2d00}, servername: www.intel.com, client-fingerprint: chrome, network: tcp}
+- {name: 美国 16, server: 67.209.183.182, port: 4433, type: hysteria2, password: 1E6GIU0WAFo9wAnsG52ruA==, auth: 1E6GIU0WAFo9wAnsG52ruA==, sni: bing.com, skip-cert-verify: true}
+- {name: 美国 17, server: 38.150.35.208, port: 8443, type: trojan, password: 1f8dc24373d4add7767beac448e32397, sni: www.apple.com, skip-cert-verify: true, udp: true}
+- {name: 美国 18, server: 176.122.176.214, port: 15555, type: vless, uuid: 0fcced9f-7436-48e1-b268-f837be824506, tls: false, network: ws, ws-opts: {path: /ws}, udp: true}
+- {name: 美国 19, server: 172.96.192.239, port: 443, type: vless, uuid: f4213964-a506-4c1a-8f74-4c73ce333212, tls: true, flow: xtls-rprx-vision, reality-opts: {public-key: OwmPqDIqYlaY_ULICISn-RtyUoFzkTE1ipZAKTLKiBs, short-id: ffda4d8141e2bdf7}, servername: www.microsoft.com, client-fingerprint: chrome, network: tcp, udp: true}
+- {name: 美国 20, server: 96.45.186.114, port: 8443, type: ss, cipher: chacha20-ietf-poly1305, password: SScN2QK7mR9pV4xH}
+- {name: 德国 01, server: vpn.leef.work, port: 443, type: vless, uuid: e3036f56-ebbb-4f29-a5a2-422ecd894def, tls: true, flow: xtls-rprx-vision, reality-opts: {public-key: myar6jZrOR7AlU13O6adZ_3u39qjSVME4_1dPs0dmB8, short-id: 91823bd3b7188d3c}, servername: www.cloudflare.com, client-fingerprint: chrome, network: tcp, udp: true}
+- {name: 德国 02, server: de.zhou-yufan.com, port: 443, type: vmess, uuid: f38e591d-d13a-4c30-9763-6be3ad65f3ec, alterId: 0, cipher: auto, tls: true, skip-cert-verify: false, servername: de.zhou-yufan.com, udp: true}
 proxy-groups:
 - name: 🚀 节点选择
   type: select
   proxies:
   - ♻️ 自动选择
-  - 🇭🇰 香港 01
-  - 🇭🇰 香港 02
-  - 🇹🇼 台湾 01
-  - 🇯🇵 日本 01
-  - 🇯🇵 日本 02
-  - 🇯🇵 日本 03
-  - 🇯🇵 日本 04
-  - 🇯🇵 日本 05
-  - 🇯🇵 日本 06
-  - 🇰🇷 韩国 01
-  - 🇺🇸 美国 01
-  - 🇺🇸 美国 02
-  - 🇺🇸 美国 03
-  - 🇺🇸 美国 04
-  - 🇺🇸 美国 05
-  - 🇺🇸 美国 06
-  - 🇺🇸 美国 07
-  - 🇺🇸 美国 08
-  - 🇺🇸 美国 09
-  - 🇺🇸 美国 10
-  - 🇺🇸 美国 11
-  - 🇺🇸 美国 12
-  - 🇺🇸 美国 13
-  - 🇺🇸 美国 14
-  - 🇺🇸 美国 15
-  - 🇺🇸 美国 16
-  - 🇺🇸 美国 17
-  - 🇺🇸 美国 18
-  - 🇺🇸 美国 19
-  - 🇺🇸 美国 20
-  - 🇩🇪 德国 01
-  - 🇩🇪 德国 02
+  - 香港 01
+  - 香港 02
+  - 台湾 01
+  - 日本 01
+  - 日本 02
+  - 日本 03
+  - 日本 04
+  - 日本 05
+  - 日本 06
+  - 韩国 01
+  - 美国 01
+  - 美国 02
+  - 美国 03
+  - 美国 04
+  - 美国 05
+  - 美国 06
+  - 美国 07
+  - 美国 08
+  - 美国 09
+  - 美国 10
+  - 美国 11
+  - 美国 12
+  - 美国 13
+  - 美国 14
+  - 美国 15
+  - 美国 16
+  - 美国 17
+  - 美国 18
+  - 美国 19
+  - 美国 20
+  - 德国 01
+  - 德国 02
 - name: ♻️ 自动选择
   type: url-test
   proxies:
-  - 🇭🇰 香港 01
-  - 🇭🇰 香港 02
-  - 🇹🇼 台湾 01
-  - 🇯🇵 日本 01
-  - 🇯🇵 日本 02
-  - 🇯🇵 日本 03
-  - 🇯🇵 日本 04
-  - 🇯🇵 日本 05
-  - 🇯🇵 日本 06
-  - 🇰🇷 韩国 01
-  - 🇺🇸 美国 01
-  - 🇺🇸 美国 02
-  - 🇺🇸 美国 03
-  - 🇺🇸 美国 04
-  - 🇺🇸 美国 05
-  - 🇺🇸 美国 06
-  - 🇺🇸 美国 07
-  - 🇺🇸 美国 08
-  - 🇺🇸 美国 09
-  - 🇺🇸 美国 10
-  - 🇺🇸 美国 11
-  - 🇺🇸 美国 12
-  - 🇺🇸 美国 13
-  - 🇺🇸 美国 14
-  - 🇺🇸 美国 15
-  - 🇺🇸 美国 16
-  - 🇺🇸 美国 17
-  - 🇺🇸 美国 18
-  - 🇺🇸 美国 19
-  - 🇺🇸 美国 20
-  - 🇩🇪 德国 01
-  - 🇩🇪 德国 02
+  - 香港 01
+  - 香港 02
+  - 台湾 01
+  - 日本 01
+  - 日本 02
+  - 日本 03
+  - 日本 04
+  - 日本 05
+  - 日本 06
+  - 韩国 01
+  - 美国 01
+  - 美国 02
+  - 美国 03
+  - 美国 04
+  - 美国 05
+  - 美国 06
+  - 美国 07
+  - 美国 08
+  - 美国 09
+  - 美国 10
+  - 美国 11
+  - 美国 12
+  - 美国 13
+  - 美国 14
+  - 美国 15
+  - 美国 16
+  - 美国 17
+  - 美国 18
+  - 美国 19
+  - 美国 20
+  - 德国 01
+  - 德国 02
   url: http://www.gstatic.com/generate_204
   interval: 300
 - name: 🐟 漏网之鱼

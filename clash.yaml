@@ -51,12 +51,13 @@ dns:
     ipcidr:
     - 240.0.0.0/4
 proxies:
-- {name: 🇭🇰 香港 01, server: 189.24.79.229, port: 443, type: vless, uuid: ee29ce31-ee5e-479b-900c-97c50e0f1218, tls: true, flow: xtls-rprx-vision, reality-opts: {public-key: Di20k-Yrc4tfKGcSYCLp88xDaYMsIrIa_6go-QvAVCw, short-id: 6717a9ae}, servername: www.microsoft.com, client-fingerprint: chrome, network: tcp, udp: true}
-- {name: 🇭🇰 香港 02, server: 191.223.209.245, port: 8443, type: hysteria2, password: r5uI9R8L6vw5vhtXT4EU9O5XCbHWePj1, auth: r5uI9R8L6vw5vhtXT4EU9O5XCbHWePj1, sni: www.microsoft.com, up: 50 Mbps, down: 300 Mbps, skip-cert-verify: true}
-- {name: 🇭🇰 香港 03, server: 151.242.85.236, port: 443, type: vless, uuid: 7aec627e-a258-4ded-9fd9-fbd7c024f950, tls: true, flow: xtls-rprx-vision, reality-opts: {public-key: gUu1n11Ef_GEoatNQzJJucvIjGTt4qxOWdxMzjoHwDM, short-id: 9b6fa4047c24629f}, servername: addons.mozilla.org, client-fingerprint: chrome, network: tcp, udp: true}
-- {name: 🇭🇰 香港 04, server: 4c2d5151.266nets.com, port: 12001, type: trojan, password: bad06c3525a6eaee1757b34776b83892, sni: ixigua.com, skip-cert-verify: true, udp: true}
-- {name: 🇭🇰 香港 05, server: 156.239.13.161, port: 51443, type: vless, uuid: 3e4c67dd-eeaa-48ad-8066-0dca798cccb3, tls: true, flow: xtls-rprx-vision, reality-opts: {public-key: WpfLIDfNGu5tmsHEa_mrZAgTDwPYD_9TK2zagNx3kgk, short-id: aa5b653590725505}, servername: www.cloudflare.com, client-fingerprint: chrome, network: tcp, udp: true}
-- {name: 🇭🇰 香港 06, server: 165.154.193.165, port: 443, type: hysteria2, password: qtMKhrFAMrVZUfupkc5CFHmRKYtNPSjt, auth: qtMKhrFAMrVZUfupkc5CFHmRKYtNPSjt, sni: 165.154.193.165, skip-cert-verify: true, obfs: salamander, obfs-password: d7897b996af77eeecb7ac010361d74fb, udp: true}
+- {name: 🇭🇰 香港 01, server: 64.90.0.30, port: 443, type: hysteria2, password: Ya8s3KxQ9pLw2, auth: Ya8s3KxQ9pLw2, sni: hk-node, up: 100 Mbps, down: 100 Mbps, skip-cert-verify: true}
+- {name: 🇭🇰 香港 02, server: 189.24.79.229, port: 443, type: vless, uuid: ee29ce31-ee5e-479b-900c-97c50e0f1218, tls: true, flow: xtls-rprx-vision, reality-opts: {public-key: Di20k-Yrc4tfKGcSYCLp88xDaYMsIrIa_6go-QvAVCw, short-id: 6717a9ae}, servername: www.microsoft.com, client-fingerprint: chrome, network: tcp, udp: true}
+- {name: 🇭🇰 香港 03, server: 191.223.209.245, port: 8443, type: hysteria2, password: r5uI9R8L6vw5vhtXT4EU9O5XCbHWePj1, auth: r5uI9R8L6vw5vhtXT4EU9O5XCbHWePj1, sni: www.microsoft.com, up: 50 Mbps, down: 300 Mbps, skip-cert-verify: true}
+- {name: 🇭🇰 香港 04, server: 151.242.85.236, port: 443, type: vless, uuid: 7aec627e-a258-4ded-9fd9-fbd7c024f950, tls: true, flow: xtls-rprx-vision, reality-opts: {public-key: gUu1n11Ef_GEoatNQzJJucvIjGTt4qxOWdxMzjoHwDM, short-id: 9b6fa4047c24629f}, servername: addons.mozilla.org, client-fingerprint: chrome, network: tcp, udp: true}
+- {name: 🇭🇰 香港 05, server: 4c2d5151.266nets.com, port: 12001, type: trojan, password: bad06c3525a6eaee1757b34776b83892, sni: ixigua.com, skip-cert-verify: true, udp: true}
+- {name: 🇭🇰 香港 06, server: 156.239.13.161, port: 51443, type: vless, uuid: 3e4c67dd-eeaa-48ad-8066-0dca798cccb3, tls: true, flow: xtls-rprx-vision, reality-opts: {public-key: WpfLIDfNGu5tmsHEa_mrZAgTDwPYD_9TK2zagNx3kgk, short-id: aa5b653590725505}, servername: www.cloudflare.com, client-fingerprint: chrome, network: tcp, udp: true}
+- {name: 🇭🇰 香港 07, server: 165.154.193.165, port: 443, type: hysteria2, password: qtMKhrFAMrVZUfupkc5CFHmRKYtNPSjt, auth: qtMKhrFAMrVZUfupkc5CFHmRKYtNPSjt, sni: 165.154.193.165, skip-cert-verify: true, obfs: salamander, obfs-password: d7897b996af77eeecb7ac010361d74fb, udp: true}
 - {name: 🇹🇼 台湾 01, server: vpn.leef.work, port: 443, type: vless, uuid: ad13f5d1-4c70-4f28-93d5-c4cca5e1d560, tls: true, flow: xtls-rprx-vision, reality-opts: {public-key: myar6jZrOR7AlU13O6adZ_3u39qjSVME4_1dPs0dmB8, short-id: 91823bd3b7188d3c}, servername: www.cloudflare.com, client-fingerprint: chrome, network: tcp, udp: true}
 - {name: 🇯🇵 日本 01, server: 166.88.97.224, port: 443, type: vless, uuid: 73ceae65-fbfc-480e-8f56-d039be69c16c, tls: true, flow: xtls-rprx-vision, reality-opts: {public-key: XEFPrL1_DWJ_lx0MLgOiXdEdn_6eysDDWlTxga7_z2E, short-id: 04b065db}, servername: www.cloudflare.com, client-fingerprint: chrome, network: tcp, udp: true}
 - {name: 🇯🇵 日本 02, server: jp.yi-yi.xyz, port: 8443, type: vless, uuid: 36c06e11-028b-40a1-a91f-c8f38f03e829, tls: true, flow: xtls-rprx-vision, reality-opts: {public-key: g3T4dVyrbNixv7HvSMlh91cYBa5kEsZCEInB7Xc_AEY, short-id: 956d8072a694ff37}, servername: www.cloudflare.com, client-fingerprint: chrome, network: tcp, udp: true}
@@ -148,6 +149,7 @@ proxy-groups:
   - 🇭🇰 香港 04
   - 🇭🇰 香港 05
   - 🇭🇰 香港 06
+  - 🇭🇰 香港 07
   - 🇹🇼 台湾 01
   - 🇯🇵 日本 01
   - 🇯🇵 日本 02
@@ -237,6 +239,7 @@ proxy-groups:
   - 🇭🇰 香港 04
   - 🇭🇰 香港 05
   - 🇭🇰 香港 06
+  - 🇭🇰 香港 07
   - 🇹🇼 台湾 01
   - 🇯🇵 日本 01
   - 🇯🇵 日本 02

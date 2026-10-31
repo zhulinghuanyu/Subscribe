@@ -572,8 +572,7 @@ def update_readme(raw_content):
     else:
         count = len([x for x in raw_content.splitlines() if x.strip()])
         display = f"已成功抓取 {count} 条节点"
-    content = f"""# 🚀 BestSub 自动订阅更新
-自动抓取 yfamilys 最新订阅。
+    content = f"""# 🚀 自动订阅更新
 ---
 ## Clash订阅
 {bt}text

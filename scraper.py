@@ -66,15 +66,11 @@ NODE_SCHEMES = (
 # ===============================
 class FlowDict(dict):
     pass
-
 class FlowDumper(yaml.SafeDumper):
     pass
-
 def _represent_flow_dict(dumper, data):
     return dumper.represent_mapping('tag:yaml.org,2002:map', data.items(), flow_style=True)
-
 FlowDumper.add_representer(FlowDict, _represent_flow_dict)
-
 def convert_to_flow(obj):
     if isinstance(obj, dict):
         return FlowDict({k: convert_to_flow(v) for k, v in obj.items()})
@@ -107,11 +103,9 @@ def b64d(s):
     s = s.strip().replace("-", "+").replace("_", "/")
     s += "=" * (-len(s) % 4)
     return base64.b64decode(s)
-
 def _q(params, key, default=""):
     v = params.get(key)
     return v[0] if v else default
-
 def decode_node_lines(content):
     content = content.strip()
     lines = [l.strip() for l in content.splitlines()
@@ -127,7 +121,6 @@ def decode_node_lines(content):
     except Exception:
         pass
     return lines
-
 def parse_node(line, idx):
     line = line.strip()
     if "://" not in line:
@@ -135,7 +128,6 @@ def parse_node(line, idx):
     scheme = line.split("://", 1)[0].lower()
     p = urlparse(line)
     name = unquote(p.fragment) if p.fragment else None
-
     if scheme == "vmess":
         body = line.split("://", 1)[1].split("#")[0]
         data = json.loads(b64d(body).decode("utf-8"))
@@ -171,7 +163,6 @@ def parse_node(line, idx):
                 opts["host"] = [data["host"]]
             proxy["h2-opts"] = opts
         return proxy
-
     if scheme == "ss":
         body = line.split("://", 1)[1].split("#")[0]
         if "@" in body:
@@ -198,7 +189,6 @@ def parse_node(line, idx):
             "password": password,
             "udp": True
         }
-
     if scheme == "ssr":
         dec = b64d(line.split("://", 1)[1]).decode("utf-8")
         main, _, qs = dec.partition("/?")
@@ -220,7 +210,6 @@ def parse_node(line, idx):
         if _q(params, "protoparam"):
             proxy["protocol-param"] = b64d(_q(params, "protoparam")).decode("utf-8")
         return proxy
-
     if scheme == "trojan":
         params = parse_qs(p.query)
         proxy = {
@@ -247,7 +236,6 @@ def parse_node(line, idx):
             proxy["network"] = "grpc"
             proxy["grpc-opts"] = {"grpc-service-name": _q(params, "serviceName", "")}
         return proxy
-
     if scheme == "vless":
         params = parse_qs(p.query)
         proxy = {
@@ -288,7 +276,6 @@ def parse_node(line, idx):
                 "grpc-service-name": _q(params, "serviceName", "") or _q(params, "path", "")
             }
         return proxy
-
     if scheme in ("hysteria2", "hy2"):
         params = parse_qs(p.query)
         proxy = {
@@ -310,7 +297,6 @@ def parse_node(line, idx):
             if _q(params, "obfs-password"):
                 proxy["obfs-password"] = _q(params, "obfs-password")
         return proxy
-
     if scheme == "tuic":
         params = parse_qs(p.query)
         proxy = {
@@ -576,15 +562,15 @@ def update_readme(raw_content):
 ---
 ## Clash订阅
 {bt}text
-https://raw.githubusercontent.com/zhulinghuanyu/BestSub/main/clash.yaml
+https://raw.githubusercontent.com/zhulinghuanyu/Subscribe/main/clash.yaml
 {bt}
 ## V2Ray订阅
 {bt}text
-https://raw.githubusercontent.com/zhulinghuanyu/BestSub/main/v2ray.txt
+https://raw.githubusercontent.com/zhulinghuanyu/Subscribe/main/v2ray.txt
 {bt}
 ## 原始订阅
 {bt}text
-https://raw.githubusercontent.com/zhulinghuanyu/BestSub/main/links.txt
+https://raw.githubusercontent.com/zhulinghuanyu/Subscribe/main/links.txt
 {bt}
 ---
 更新时间:

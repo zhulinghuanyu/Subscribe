@@ -7,18 +7,18 @@ import os
 from datetime import datetime, timezone, timedelta
 from urllib.parse import urlparse, parse_qs, unquote
 import yaml
-import cloudscraper
 from bs4 import BeautifulSoup
+from curl_cffi import requests as cffi_requests   # 替换 cloudscraper
 
 TARGET_URL = "https://yfamilys.com/subscribe"
 BEIJING_TZ = timezone(timedelta(hours=8))
 SUB_APIS = [
-     "https://api.v1.mk/sub",
-     "https://url.v1.mk/sub",
-     "https://sub.xeton.dev/sub",
-     "https://subapi.cmliussss.net/sub",
-     "https://subapi.fxxk.dedyn.io/sub",
-     "https://api.dler.io/sub"
+    "https://api.v1.mk/sub",
+    "https://url.v1.mk/sub",
+    "https://sub.xeton.dev/sub",
+    "https://subapi.cmliussss.net/sub",
+    "https://subapi.fxxk.dedyn.io/sub",
+    "https://api.dler.io/sub"
 ]
 EXCLUDE_KEYWORDS = [
     "cloudflareinsights.com",
@@ -63,11 +63,15 @@ NODE_SCHEMES = (
 # ===============================
 class FlowDict(dict):
     pass
+
 class FlowDumper(yaml.SafeDumper):
     pass
+
 def _represent_flow_dict(dumper, data):
     return dumper.represent_mapping('tag:yaml.org,2002:map', data.items(), flow_style=True)
+
 FlowDumper.add_representer(FlowDict, _represent_flow_dict)
+
 def convert_to_flow(obj):
     if isinstance(obj, dict):
         return FlowDict({k: convert_to_flow(v) for k, v in obj.items()})
@@ -88,6 +92,7 @@ def safe_write(filename, content):
 # 清洗时间戳注释行
 # ===============================
 TIME_COMMENT_RE = re.compile(r"^\s*(//|#).*\d{4}-\d{2}-\d{2}.*$", re.I)
+
 def strip_time_comments(content):
     lines = [ln for ln in content.splitlines() if not TIME_COMMENT_RE.match(ln)]
     return "\n".join(lines).strip()
@@ -99,9 +104,11 @@ def b64d(s):
     s = s.strip().replace("-", "+").replace("_", "/")
     s += "=" * (-len(s) % 4)
     return base64.b64decode(s)
+
 def _q(params, key, default=""):
     v = params.get(key)
     return v[0] if v else default
+
 def decode_node_lines(content):
     content = content.strip()
     lines = [l.strip() for l in content.splitlines()
@@ -117,6 +124,7 @@ def decode_node_lines(content):
     except Exception:
         pass
     return lines
+
 def parse_node(line, idx):
     line = line.strip()
     if "://" not in line:
@@ -309,8 +317,9 @@ def parse_node(line, idx):
             proxy["sni"] = sni
         if _q(params, "insecure") in ("1", "true"):
             proxy["skip-cert-verify"] = True
-        return proxy     
+        return proxy
     return None
+
 def build_clash_yaml(node_lines):
     proxies, used = [], set()
     for idx, line in enumerate(node_lines, 1):
@@ -372,7 +381,7 @@ def simplify_clash_yaml(yaml_content):
     try:
         config = yaml.safe_load(yaml_content)
         if not config or not isinstance(config, dict):
-            return yaml_content          
+            return yaml_content
         proxies = config.get("proxies", [])
         if not proxies:
             return yaml_content
@@ -403,7 +412,7 @@ def simplify_clash_yaml(yaml_content):
             "MATCH,🐟 漏网之鱼"
         ]
         for key in ["rule-providers", "tun", "ebpf", "script", "ruleset", "proxy-provider"]:
-            config.pop(key, None)          
+            config.pop(key, None)
         return yaml.dump(config, Dumper=FlowDumper, allow_unicode=True, sort_keys=False, default_flow_style=False, width=4096)
     except Exception as e:
         print(f"⚠️ 简化 Clash YAML 失败: {e}")
@@ -456,23 +465,27 @@ https://raw.githubusercontent.com/zhulinghuanyu/BestSub/main/links.txt
         print("README 无变化")
 
 # ===============================
-# 请求重试
+# 请求重试（curl_cffi 版本）
 # ===============================
-def request_retry(scraper, url, **kwargs):
+def request_retry(url, headers=None, timeout=45, **kwargs):
+    if headers is None:
+        headers = DEFAULT_HEADERS
     last_error = None
-    for i in range(4):  # 多试一次
-        try:
-            # 每次重试稍微换一下指纹，提高成功率
-            if i > 0:
-                scraper = cloudscraper.create_scraper(
-                    browser={"browser": "chrome", "platform": "windows", "desktop": True}
-                )
-                time.sleep(2 + i * 1.5)  # 递增等待
+    impersonate_list = ["chrome131", "chrome124", "chrome120", "chrome110"]
 
-            res = scraper.get(url, **kwargs)
+    for i in range(4):
+        try:
+            impersonate = impersonate_list[i % len(impersonate_list)]
+            res = cffi_requests.get(
+                url,
+                impersonate=impersonate,
+                headers=headers,
+                timeout=timeout,
+                **kwargs
+            )
             text = res.text or ""
 
-            # 成功条件：状态码 200 且页面里真正有订阅链接
+            # 成功条件：200 且页面真正包含订阅链接
             has_real_content = (
                 res.status_code == 200
                 and (
@@ -482,18 +495,21 @@ def request_retry(scraper, url, **kwargs):
             )
 
             if has_real_content:
-                print(f"✅ 第 {i+1} 次请求成功 (status={res.status_code}, len={len(text)})")
+                print(f"✅ 第 {i+1} 次请求成功 (status={res.status_code}, len={len(text)}, impersonate={impersonate})")
                 return res
 
-            # 记录失败原因，方便调试
-            challenge = any(k in text for k in ["Just a moment", "cf-browser-verification", "challenge-platform", "Checking your browser"])
-            print(f"⚠️ 第 {i+1}/4 次失败: status={res.status_code}, len={len(text)}, challenge={challenge}")
+            challenge = any(k in text for k in [
+                "Just a moment", "cf-browser-verification",
+                "challenge-platform", "Checking your browser"
+            ])
+            print(f"⚠️ 第 {i+1}/4 次失败: status={res.status_code}, len={len(text)}, challenge={challenge}, impersonate={impersonate}")
             last_error = f"status={res.status_code}, challenge={challenge}"
 
         except Exception as e:
             print(f"⚠️ 第 {i+1}/4 次异常: {e}")
             last_error = str(e)
-            time.sleep(3)
+
+        time.sleep(2 + i * 1.5)
 
     raise Exception(f"请求失败:{url} | 最后错误: {last_error}")
 
@@ -512,13 +528,14 @@ def is_valid_sub_url(url):
 # ===============================
 # 转换订阅（在线 API）
 # ===============================
-def convert_sub(scraper, target, raw_input):
+def convert_sub(target, raw_input):
     timestamp = int(time.time())
     if not raw_input.startswith("http"):
         node_lines = [line.strip() for line in raw_input.splitlines() if line.strip()]
         sub_param = "|".join(node_lines)
     else:
         sub_param = raw_input
+
     for api in SUB_APIS:
         try:
             print(f"🔄 尝试转换 API: {api} -> {target}")
@@ -528,7 +545,13 @@ def convert_sub(scraper, target, raw_input):
                 "insert": "false",
                 "_t": timestamp
             }
-            res = scraper.get(api, params=params, headers=DEFAULT_HEADERS, timeout=30)
+            res = cffi_requests.get(
+                api,
+                params=params,
+                headers=DEFAULT_HEADERS,
+                impersonate="chrome131",
+                timeout=30
+            )
             if res.status_code != 200:
                 print(f" ↳ 状态码异常: {res.status_code}")
                 continue
@@ -553,17 +576,9 @@ def convert_sub(scraper, target, raw_input):
 # ===============================
 def fetch_links():
     print("🌐 请求 yfamilys 网页...")
-    scraper = cloudscraper.create_scraper(
-        browser={
-            "browser": "chrome",
-            "platform": "windows",
-            "desktop": True
-        },
-        delay=10,          # 给 JS 挑战更多时间
-        # interpreter="nodejs"  # 如果 CI 装了 node，可以打开，成功率更高
-    )
-    response = request_retry(scraper, TARGET_URL, headers=DEFAULT_HEADERS, timeout=45)
+    response = request_retry(TARGET_URL, headers=DEFAULT_HEADERS, timeout=45)
     html_text = html.unescape(response.text)
+
     extracted = None
     node_pattern = (
         r"(?:vmess|vless|trojan|ss|ssr|"
@@ -590,8 +605,10 @@ def fetch_links():
                 if is_valid_sub_url(u):
                     extracted = u
                     break
+
     if not extracted:
         raise Exception("❌ 未在页面中查找到有效节点或动态链接")
+
     safe_write("links.txt", extracted)
 
     # -----------------------------
@@ -599,10 +616,16 @@ def fetch_links():
     # -----------------------------
     v2ray_content = None
     node_lines = []
+
     if extracted.startswith("http"):
         try:
             print("⬇️ 正在直连拉取订阅内容...")
-            direct_res = scraper.get(extracted, headers=SUB_CLIENT_HEADERS, timeout=15)
+            direct_res = cffi_requests.get(
+                extracted,
+                headers=SUB_CLIENT_HEADERS,
+                impersonate="chrome131",
+                timeout=15
+            )
             text = direct_res.text.strip()
             text_lower = text.lower()
             is_html = "<html" in text_lower
@@ -630,17 +653,19 @@ def fetch_links():
                     print("ℹ️ 直连内容不符合纯 V2Ray 节点格式，转用 API 转换")
         except Exception as e:
             print(f"⚠️ 直连拉取失败，尝试通过 API 转换: {e}")
+
         if not v2ray_content:
-            v2ray_content = convert_sub(scraper, "v2ray", extracted)
+            v2ray_content = convert_sub("v2ray", extracted)
         if not v2ray_content:
             raise Exception("❌ V2Ray 内容获取及转换均失败")
+
         v2ray_content = strip_time_comments(v2ray_content)
         if not v2ray_content:
             raise Exception("❌ V2Ray 内容清洗后为空")
         node_lines = decode_node_lines(v2ray_content)
         if not any(l.lower().startswith(NODE_SCHEMES) for l in node_lines):
             print("⚠️ 解码后无有效节点 URI，强制重新通过 API 转换...")
-            v2ray_content = convert_sub(scraper, "v2ray", extracted)
+            v2ray_content = convert_sub("v2ray", extracted)
             if not v2ray_content:
                 raise Exception("❌ V2Ray 强制转换失败")
             v2ray_content = strip_time_comments(v2ray_content)
@@ -652,11 +677,14 @@ def fetch_links():
         ]
         if not node_lines:
             node_lines = [l for l in extracted.splitlines() if l.strip()]
+
     if not node_lines:
         raise Exception("❌ 未提取到有效的 V2Ray 节点")
+
     pure_nodes = [l for l in node_lines if l.strip().lower().startswith(NODE_SCHEMES)]
     if not pure_nodes:
         raise Exception("❌ 过滤后无有效节点 URI，无法生成 V2Ray 订阅")
+
     raw_nodes_text = "\n".join(pure_nodes)
     b64_v2ray = base64.b64encode(raw_nodes_text.encode("utf-8")).decode("utf-8")
     safe_write("v2ray.txt", b64_v2ray)
@@ -665,21 +693,26 @@ def fetch_links():
     # -----------------------------
     # Clash 订阅更新逻辑（在线 API 优先，本地转换兜底）
     # -----------------------------
-    clash_content = convert_sub(scraper, "clash", extracted)
+    clash_content = convert_sub("clash", extracted)
     if clash_content:
         clash_content = simplify_clash_yaml(clash_content)
     else:
         print("⚠️ 在线转换 API 全部失效，启用本地 Clash 转换...")
-        clash_content = build_clash_yaml(pure_nodes)   
+        clash_content = build_clash_yaml(pure_nodes)
+
     if not clash_content:
         raise Exception("❌ Clash 配置转换失败")
+
     clash_content = strip_time_comments(clash_content)
     if not clash_content:
         raise Exception("❌ Clash 配置清洗后为空")
+
     safe_write("clash.yaml", clash_content)
     print("✅ clash.yaml 更新完成")
 
     update_readme(extracted)
     print("🎉 所有任务执行完成！")
+
+
 if __name__ == "__main__":
     fetch_links()

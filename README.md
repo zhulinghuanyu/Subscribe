@@ -1,24 +1,23 @@
-# 🚀 BestSub 自动订阅更新
-自动抓取 yfamilys 最新订阅。
+# 🚀 自动订阅更新
 ---
 ## Clash订阅
 ```text
-https://raw.githubusercontent.com/zhulinghuanyu/BestSub/main/clash.yaml
+https://raw.githubusercontent.com/zhulinghuanyu/Subscribe/main/clash.yaml
 ```
 ## V2Ray订阅
 ```text
-https://raw.githubusercontent.com/zhulinghuanyu/BestSub/main/v2ray.txt
+https://raw.githubusercontent.com/zhulinghuanyu/Subscribe/main/v2ray.txt
 ```
 ## 原始订阅
 ```text
-https://raw.githubusercontent.com/zhulinghuanyu/BestSub/main/links.txt
+https://raw.githubusercontent.com/zhulinghuanyu/Subscribe/main/links.txt
 ```
 ---
 更新时间:
 ```text
-2026-10-31 10:08:04 (UTC+8)
+2026-10-31 10:29:01 (UTC+8)
 ```
 当前状态:
 ```text
-https://yfamilys.com/subscribe/uKr3QzRtfd3goiw5r9RDs6yXWugUny74
+https://yfamilys.com/subscribe/crc7F1MxBLdVVZxiposixwMg4FkgKVQk
 ```

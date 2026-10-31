@@ -8,18 +8,18 @@ from datetime import datetime, timezone, timedelta
 from urllib.parse import urlparse, parse_qs, unquote
 import yaml
 from bs4 import BeautifulSoup
-from curl_cffi import requests as cffi_requests   # 替换 cloudscraper
+from curl_cffi import requests as cffi_requests
 
 TARGET_URL = "https://yfamilys.com/subscribe"
 BEIJING_TZ = timezone(timedelta(hours=8))
+
 SUB_APIS = [
     "https://api.v1.mk/sub",
     "https://url.v1.mk/sub",
     "https://sub.xeton.dev/sub",
-    "https://subapi.cmliussss.net/sub",
-    "https://subapi.fxxk.dedyn.io/sub",
-    "https://api.dler.io/sub"
+    "https://api.dler.io/sub",
 ]
+
 EXCLUDE_KEYWORDS = [
     "cloudflareinsights.com",
     "google-analytics.com",
@@ -34,6 +34,7 @@ EXCLUDE_KEYWORDS = [
     "github.com",
     "githubusercontent.com",
 ]
+
 DEFAULT_HEADERS = {
     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36",
     "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
@@ -50,9 +51,11 @@ DEFAULT_HEADERS = {
     "sec-ch-ua-mobile": "?0",
     "sec-ch-ua-platform": '"Windows"',
 }
+
 SUB_CLIENT_HEADERS = {
     "User-Agent": "v2rayN/6.23"
 }
+
 NODE_SCHEMES = (
     "vmess://", "ss://", "ssr://", "trojan://", "vless://",
     "hysteria2://", "hy2://", "tuic://", "hysteria://"
@@ -132,6 +135,7 @@ def parse_node(line, idx):
     scheme = line.split("://", 1)[0].lower()
     p = urlparse(line)
     name = unquote(p.fragment) if p.fragment else None
+
     if scheme == "vmess":
         body = line.split("://", 1)[1].split("#")[0]
         data = json.loads(b64d(body).decode("utf-8"))
@@ -167,6 +171,7 @@ def parse_node(line, idx):
                 opts["host"] = [data["host"]]
             proxy["h2-opts"] = opts
         return proxy
+
     if scheme == "ss":
         body = line.split("://", 1)[1].split("#")[0]
         if "@" in body:
@@ -193,6 +198,7 @@ def parse_node(line, idx):
             "password": password,
             "udp": True
         }
+
     if scheme == "ssr":
         dec = b64d(line.split("://", 1)[1]).decode("utf-8")
         main, _, qs = dec.partition("/?")
@@ -214,6 +220,7 @@ def parse_node(line, idx):
         if _q(params, "protoparam"):
             proxy["protocol-param"] = b64d(_q(params, "protoparam")).decode("utf-8")
         return proxy
+
     if scheme == "trojan":
         params = parse_qs(p.query)
         proxy = {
@@ -240,6 +247,7 @@ def parse_node(line, idx):
             proxy["network"] = "grpc"
             proxy["grpc-opts"] = {"grpc-service-name": _q(params, "serviceName", "")}
         return proxy
+
     if scheme == "vless":
         params = parse_qs(p.query)
         proxy = {
@@ -280,6 +288,7 @@ def parse_node(line, idx):
                 "grpc-service-name": _q(params, "serviceName", "") or _q(params, "path", "")
             }
         return proxy
+
     if scheme in ("hysteria2", "hy2"):
         params = parse_qs(p.query)
         proxy = {
@@ -301,6 +310,7 @@ def parse_node(line, idx):
             if _q(params, "obfs-password"):
                 proxy["obfs-password"] = _q(params, "obfs-password")
         return proxy
+
     if scheme == "tuic":
         params = parse_qs(p.query)
         proxy = {
@@ -374,9 +384,6 @@ def build_clash_yaml(node_lines):
     }
     return yaml.dump(config, Dumper=FlowDumper, allow_unicode=True, sort_keys=False, default_flow_style=False, width=4096)
 
-# ===============================
-# 简化 Clash YAML (去除臃肿的规则)
-# ===============================
 def simplify_clash_yaml(yaml_content):
     try:
         config = yaml.safe_load(yaml_content)
@@ -417,6 +424,142 @@ def simplify_clash_yaml(yaml_content):
     except Exception as e:
         print(f"⚠️ 简化 Clash YAML 失败: {e}")
         return yaml_content
+
+# ===============================
+# 从 Clash proxy 字典反推标准节点 URI
+# ===============================
+def clash_proxy_to_uri(proxy: dict) -> str | None:
+    try:
+        ptype = proxy.get("type", "").lower()
+        name = proxy.get("name", "node")
+        server = proxy.get("server")
+        port = proxy.get("port")
+        if not (server and port):
+            return None
+
+        if ptype == "ss":
+            method = proxy.get("cipher", "aes-256-gcm")
+            password = proxy.get("password", "")
+            userinfo = base64.b64encode(f"{method}:{password}".encode()).decode().rstrip("=")
+            return f"ss://{userinfo}@{server}:{port}#{name}"
+
+        if ptype == "vmess":
+            data = {
+                "v": "2",
+                "ps": name,
+                "add": server,
+                "port": str(port),
+                "id": proxy.get("uuid", ""),
+                "aid": str(proxy.get("alterId", 0)),
+                "scy": proxy.get("cipher", "auto"),
+                "net": proxy.get("network", "tcp"),
+                "type": "none",
+                "host": "",
+                "path": "",
+                "tls": "",
+                "sni": "",
+            }
+            if proxy.get("tls"):
+                data["tls"] = "tls"
+                data["sni"] = proxy.get("servername") or proxy.get("sni") or ""
+            if proxy.get("network") == "ws":
+                data["net"] = "ws"
+                ws = proxy.get("ws-opts") or {}
+                data["path"] = ws.get("path", "/")
+                data["host"] = (ws.get("headers") or {}).get("Host", "")
+            elif proxy.get("network") == "grpc":
+                data["net"] = "grpc"
+                data["path"] = (proxy.get("grpc-opts") or {}).get("grpc-service-name", "")
+            body = base64.b64encode(json.dumps(data, ensure_ascii=False).encode()).decode()
+            return f"vmess://{body}"
+
+        if ptype == "trojan":
+            password = proxy.get("password", "")
+            sni = proxy.get("sni") or proxy.get("servername") or ""
+            query = []
+            if sni:
+                query.append(f"sni={sni}")
+            if proxy.get("skip-cert-verify"):
+                query.append("allowInsecure=1")
+            if proxy.get("network") == "ws":
+                query.append("type=ws")
+                ws = proxy.get("ws-opts") or {}
+                query.append(f"path={ws.get('path', '/')}")
+                host = (ws.get("headers") or {}).get("Host")
+                if host:
+                    query.append(f"host={host}")
+            q = "&".join(query)
+            return f"trojan://{password}@{server}:{port}?{q}#{name}" if q else f"trojan://{password}@{server}:{port}#{name}"
+
+        if ptype == "vless":
+            uuid = proxy.get("uuid", "")
+            query = ["encryption=none"]
+            if proxy.get("tls"):
+                query.append("security=tls")
+                sni = proxy.get("servername") or proxy.get("sni")
+                if sni:
+                    query.append(f"sni={sni}")
+            if proxy.get("flow"):
+                query.append(f"flow={proxy['flow']}")
+            if proxy.get("network") == "ws":
+                query.append("type=ws")
+                ws = proxy.get("ws-opts") or {}
+                query.append(f"path={ws.get('path', '/')}")
+                host = (ws.get("headers") or {}).get("Host")
+                if host:
+                    query.append(f"host={host}")
+            elif proxy.get("network") == "grpc":
+                query.append("type=grpc")
+                service = (proxy.get("grpc-opts") or {}).get("grpc-service-name", "")
+                if service:
+                    query.append(f"serviceName={service}")
+            q = "&".join(query)
+            return f"vless://{uuid}@{server}:{port}?{q}#{name}"
+
+        if ptype in ("hysteria2", "hy2"):
+            password = proxy.get("password", "")
+            sni = proxy.get("sni") or ""
+            query = []
+            if sni:
+                query.append(f"sni={sni}")
+            if proxy.get("skip-cert-verify"):
+                query.append("insecure=1")
+            if proxy.get("obfs"):
+                query.append(f"obfs={proxy['obfs']}")
+                if proxy.get("obfs-password"):
+                    query.append(f"obfs-password={proxy['obfs-password']}")
+            q = "&".join(query)
+            return f"hysteria2://{password}@{server}:{port}?{q}#{name}" if q else f"hysteria2://{password}@{server}:{port}#{name}"
+
+        if ptype == "tuic":
+            uuid = proxy.get("uuid", "")
+            password = proxy.get("password", "")
+            sni = proxy.get("sni") or ""
+            query = []
+            if sni:
+                query.append(f"sni={sni}")
+            if proxy.get("skip-cert-verify"):
+                query.append("insecure=1")
+            q = "&".join(query)
+            return f"tuic://{uuid}:{password}@{server}:{port}?{q}#{name}" if q else f"tuic://{uuid}:{password}@{server}:{port}#{name}"
+
+    except Exception as e:
+        print(f"⚠️ 转换节点失败 {proxy.get('name')}: {e}")
+    return None
+
+def extract_nodes_from_clash_yaml(yaml_text: str) -> list[str]:
+    try:
+        config = yaml.safe_load(yaml_text)
+        proxies = config.get("proxies") or []
+        nodes = []
+        for p in proxies:
+            uri = clash_proxy_to_uri(p)
+            if uri:
+                nodes.append(uri)
+        return nodes
+    except Exception as e:
+        print(f"⚠️ 解析 Clash YAML 失败: {e}")
+        return []
 
 # ===============================
 # README 更新
@@ -485,7 +628,6 @@ def request_retry(url, headers=None, timeout=45, **kwargs):
             )
             text = res.text or ""
 
-            # 成功条件：200 且页面真正包含订阅链接
             has_real_content = (
                 res.status_code == 200
                 and (
@@ -612,7 +754,7 @@ def fetch_links():
     safe_write("links.txt", extracted)
 
     # -----------------------------
-    # V2Ray 节点更新逻辑 (标准 Base64 格式)
+    # V2Ray 节点更新逻辑
     # -----------------------------
     v2ray_content = None
     node_lines = []
@@ -624,7 +766,7 @@ def fetch_links():
                 extracted,
                 headers=SUB_CLIENT_HEADERS,
                 impersonate="chrome131",
-                timeout=15
+                timeout=20
             )
             text = direct_res.text.strip()
             text_lower = text.lower()
@@ -637,6 +779,7 @@ def fetch_links():
                 line.strip().lower().startswith(NODE_SCHEMES)
                 for line in text.splitlines()
             )
+
             if (direct_res.status_code == 200
                     and len(text) > 30
                     and not is_html
@@ -644,10 +787,16 @@ def fetch_links():
                     and not looks_like_clash_yaml):
                 v2ray_content = text
                 print("✅ 直连成功获取 V2Ray 节点内容")
+            elif looks_like_clash_yaml and direct_res.status_code == 200:
+                print("ℹ️ 直连内容为 Clash YAML，本地提取节点...")
+                pure_nodes_from_clash = extract_nodes_from_clash_yaml(text)
+                if pure_nodes_from_clash:
+                    print(f"✅ 从 Clash 配置成功提取 {len(pure_nodes_from_clash)} 个节点")
+                    v2ray_content = "\n".join(pure_nodes_from_clash)
+                else:
+                    print("⚠️ 从 Clash 提取节点失败，尝试在线 API")
             else:
-                if looks_like_clash_yaml:
-                    print("ℹ️ 直连内容为 Clash YAML 格式，转用 API 获取纯净 V2Ray 节点")
-                elif is_html:
+                if is_html:
                     print("ℹ️ 直连返回 HTML，转用 API 转换")
                 else:
                     print("ℹ️ 直连内容不符合纯 V2Ray 节点格式，转用 API 转换")
@@ -691,7 +840,7 @@ def fetch_links():
     print(f"✅ v2ray.txt 更新完成 (标准单行 Base64 格式，共 {len(pure_nodes)} 个节点)")
 
     # -----------------------------
-    # Clash 订阅更新逻辑（在线 API 优先，本地转换兜底）
+    # Clash 订阅更新逻辑
     # -----------------------------
     clash_content = convert_sub("clash", extracted)
     if clash_content:

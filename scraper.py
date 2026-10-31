@@ -35,8 +35,20 @@ EXCLUDE_KEYWORDS = [
     "githubusercontent.com",
 ]
 DEFAULT_HEADERS = {
-    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
-    "Accept-Language": "zh-CN,zh;q=0.9",
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36",
+    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
+    "Accept-Language": "zh-CN,zh;q=0.9,en;q=0.8",
+    "Accept-Encoding": "gzip, deflate, br, zstd",
+    "Connection": "keep-alive",
+    "Upgrade-Insecure-Requests": "1",
+    "Sec-Fetch-Dest": "document",
+    "Sec-Fetch-Mode": "navigate",
+    "Sec-Fetch-Site": "none",
+    "Sec-Fetch-User": "?1",
+    "Cache-Control": "max-age=0",
+    "sec-ch-ua": '"Google Chrome";v="131", "Chromium";v="131", "Not_A Brand";v="24"',
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": '"Windows"',
 }
 SUB_CLIENT_HEADERS = {
     "User-Agent": "v2rayN/6.23"
@@ -447,15 +459,43 @@ https://raw.githubusercontent.com/zhulinghuanyu/BestSub/main/links.txt
 # 请求重试
 # ===============================
 def request_retry(scraper, url, **kwargs):
-    for i in range(3):
+    last_error = None
+    for i in range(4):  # 多试一次
         try:
+            # 每次重试稍微换一下指纹，提高成功率
+            if i > 0:
+                scraper = cloudscraper.create_scraper(
+                    browser={"browser": "chrome", "platform": "windows", "desktop": True}
+                )
+                time.sleep(2 + i * 1.5)  # 递增等待
+
             res = scraper.get(url, **kwargs)
-            if res.status_code == 200:
+            text = res.text or ""
+
+            # 成功条件：状态码 200 且页面里真正有订阅链接
+            has_real_content = (
+                res.status_code == 200
+                and (
+                    "urlBox" in text
+                    or re.search(r"https://yfamilys\.com/subscribe/[A-Za-z0-9_\-]{10,}", text)
+                )
+            )
+
+            if has_real_content:
+                print(f"✅ 第 {i+1} 次请求成功 (status={res.status_code}, len={len(text)})")
                 return res
+
+            # 记录失败原因，方便调试
+            challenge = any(k in text for k in ["Just a moment", "cf-browser-verification", "challenge-platform", "Checking your browser"])
+            print(f"⚠️ 第 {i+1}/4 次失败: status={res.status_code}, len={len(text)}, challenge={challenge}")
+            last_error = f"status={res.status_code}, challenge={challenge}"
+
         except Exception as e:
-            print(f"请求失败 {i+1}/3:", e)
+            print(f"⚠️ 第 {i+1}/4 次异常: {e}")
+            last_error = str(e)
             time.sleep(3)
-    raise Exception(f"请求失败:{url}")
+
+    raise Exception(f"请求失败:{url} | 最后错误: {last_error}")
 
 # ===============================
 # 判断订阅 URL
@@ -514,9 +554,15 @@ def convert_sub(scraper, target, raw_input):
 def fetch_links():
     print("🌐 请求 yfamilys 网页...")
     scraper = cloudscraper.create_scraper(
-        browser={"browser": "chrome", "platform": "windows", "desktop": True}
+        browser={
+            "browser": "chrome",
+            "platform": "windows",
+            "desktop": True
+        },
+        delay=10,          # 给 JS 挑战更多时间
+        # interpreter="nodejs"  # 如果 CI 装了 node，可以打开，成功率更高
     )
-    response = request_retry(scraper, TARGET_URL, headers=DEFAULT_HEADERS, timeout=30)
+    response = request_retry(scraper, TARGET_URL, headers=DEFAULT_HEADERS, timeout=45)
     html_text = html.unescape(response.text)
     extracted = None
     node_pattern = (

@@ -15,9 +15,9 @@ https://raw.githubusercontent.com/zhulinghuanyu/Subscribe/main/links.txt
 ---
 更新时间:
 ```text
-2026-11-04 14:53:59 (UTC+8)
+2026-11-04 23:15:27 (UTC+8)
 ```
 当前状态:
 ```text
-https://yfamilys.com/subscribe/iUv2o8MuZ2Z0ZKMN4tZjqinLLzCzWpUS
+https://yfamilys.com/subscribe/ZmCw28TJvzSGWtOefzTw1Add4rCRDjxY
 ```
